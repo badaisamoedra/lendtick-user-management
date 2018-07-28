@@ -1,3 +1,3 @@
 <?php
-echo"artifact tes";
+echo"artifact test";
 ?>
