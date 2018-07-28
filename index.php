@@ -1,3 +1,3 @@
 <?php
-	echo "Hello World Development Test";
+	echo "Hello World QA Test";
 ?>
