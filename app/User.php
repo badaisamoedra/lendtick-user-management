@@ -13,11 +13,11 @@ class User extends Model implements JWTSubject, AuthenticatableContract, Authori
 {
     use Authenticatable, Authorizable;
 
-    protected $table = 'user.User';
-    protected $primaryKey = 'IdUser';
+    protected $table = 'user.user';
+    protected $primaryKey = 'id_user';
 
-    const CREATED_AT = 'CreatedDate';
-    const UPDATED_AT = 'DeletedDate';
+    const CREATED_AT = 'created_at';
+    const UPDATED_AT = 'updated_at';
 
     /**
      * The attributes that are mass assignable.
@@ -25,7 +25,7 @@ class User extends Model implements JWTSubject, AuthenticatableContract, Authori
      * @var array
      */
     protected $fillable = [
-        'Username', 'Password'
+        'username', 'password'
     ];
 
     /**
@@ -34,7 +34,7 @@ class User extends Model implements JWTSubject, AuthenticatableContract, Authori
      * @var array
      */
     protected $hidden = [
-        'Password',
+        'password',
     ];
 
     /**
