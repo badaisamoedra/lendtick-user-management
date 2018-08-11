@@ -21,6 +21,38 @@ class AuthController extends Controller
         //
     }
 
+    /**
+    * @SWG\Post(
+    *     path="/auth",
+    *     consumes={"multipart/form-data"},
+    *     description="Login Lendtick",
+    *     operationId="auth",
+    *     consumes={"application/x-www-form-urlencoded"},
+    *     produces={"application/json"},
+    *     @SWG\Parameter(
+    *         description="Email for login Lendtick",
+    *         in="formData",
+    *         name="username",
+    *         required=true,
+    *         type="string"
+    *     ),
+    *     @SWG\Parameter(
+    *         description="Password bond to that email",
+    *         in="formData",
+    *         name="password",
+    *         required=true,
+    *         type="string"
+    *     ), 
+    *     @SWG\Response(
+    *         response="200",
+    *         description="successful"
+    *     ),
+    *     summary="Authentication",
+    *     tags={
+    *         "Authentication"
+    *     }
+    * )
+    * */
     public function auth(Request $request, hash $hash){
         $credentials = $request->only('username', 'password'); // grab credentials from the request
 
