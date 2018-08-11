@@ -48,6 +48,60 @@
                     }
                 }
             }
+        },
+        "/auth/check": {
+            "get": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Check Authentication",
+                "description": "Check Token Lendtick",
+                "operationId": "checkAuth",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Token Authorization",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful"
+                    }
+                }
+            }
+        },
+        "/auth/refresh": {
+            "get": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Refresh Authentication",
+                "description": "Refresh Token Lendtick",
+                "operationId": "refreshAuth",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Token Authorization",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful"
+                    }
+                }
+            }
         }
     },
     "definitions": {}

@@ -75,36 +75,82 @@ class AuthController extends Controller
         return response()->json(Api::response(true,'Success Login',['token' => "Bearer $token"]));
     }
 
+    /**
+    * @SWG\Get(
+    *     path="/auth/check",
+    *     description="Check Token Lendtick",
+    *     operationId="checkAuth",
+    *     produces={"application/json"},
+    *     @SWG\Parameter(
+    *         name="Authorization",
+    *         in="header",
+    *         description="Token Authorization",
+    *         required=true,
+    *         type="string",
+    *     ),
+    *     @SWG\Response(
+    *         response="200",
+    *         description="successful"
+    *     ),
+    *     summary="Check Authentication",
+    *     tags={
+    *         "Authentication"
+    *     }
+    * )
+    * */
     public function check(Request $request){
         try {
             // set request to parser
             JWTAuth::parser()->setRequest($request);
             // validate payload
             if ($user = !(JWTAuth::parseToken()->authenticate())) {
-                return response()->json(['user_not_found'], 404);
+                return response()->json(Api::response(false, 'user_not_found'), 404);
             }
         } catch (JWTException $e) {
             if($e->getMessage()=="Token has expired"){
                 try{
                     $token = JWTAuth::refresh($request->header('Authorization'));
                 } catch(JWTException $e){
-                    return response()->json(['status' => false, 'message' => $e->getMessage(), 'data' => null], 401);
+                    return response()->json(Api::response(false, $e->getMessage()), 401);
                 }
             }
-            return response()->json(['status' => false, 'message' => $e->getMessage(), 'data' => isset($token)?['token'=>'Bearer '.$token]:null], 401);
+            return response()->json(Api::response(false,$e->getMessage(),isset($token)?['token'=>'Bearer '.$token]:null), 401);
         }
 
         // the token is valid and we have found the user via the sub claim
-        return response()->json(compact('user'));
+        return response()->json(Api::response(true,"Valid Token"));
     }
 
+    /**
+    * @SWG\Get(
+    *     path="/auth/refresh",
+    *     description="Refresh Token Lendtick",
+    *     operationId="refreshAuth",
+    *     produces={"application/json"},
+    *     @SWG\Parameter(
+    *         name="Authorization",
+    *         in="header",
+    *         description="Token Authorization",
+    *         required=true,
+    *         type="string",
+    *     ),
+    *     @SWG\Response(
+    *         response="200",
+    *         description="successful"
+    *     ),
+    *     summary="Refresh Authentication",
+    *     tags={
+    *         "Authentication"
+    *     }
+    * )
+    * */
     public function refresh(Request $request){
         try{
             $token = JWTAuth::refresh($request->header('Authorization'));
         } catch(JWTException $e){
-            return response()->json(['status' => false, 'message' => $e->getMessage(), 'data' => null], 401);
+            return response()->json(Api::response(false,$e->getMessage()), 401);
         }
 
-        return response()->json(['status' => false, 'message' => 'Token refresh', 'data' => ['token'=>'Bearer '.$token]], 200);
+        return response()->json(Api::response(false,'Token refresh', ['token'=>'Bearer '.$token]), 200);
     }
 }
