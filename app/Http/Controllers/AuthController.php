@@ -146,11 +146,13 @@ class AuthController extends Controller
     * */
     public function refresh(Request $request){
         try{
-            $token = JWTAuth::refresh($request->header('Authorization'));
+            JWTAuth::parser()->setRequest($request);
+            $tmp = JWTAuth::getToken();
+            $token = JWTAuth::refresh($tmp);
         } catch(JWTException $e){
-            return response()->json(Api::response(false,$e->getMessage()), 401);
+            return response()->json(Api::response(false, $e->getMessage()), 401);
         }
 
-        return response()->json(Api::response(false,'Token refresh', ['token'=>'Bearer '.$token]), 200);
+        return response()->json(Api::response(false,'Token refresh',['token'=>'Bearer '.$token]), 200);
     }
 }
