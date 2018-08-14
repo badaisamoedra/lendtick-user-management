@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class RoleMaster extends Model {
 
     protected $table = 'user.master_role';
-    protected $primaryKey = 'id_master_role';
+    // protected $primaryKey = 'id_master_role';
 
     protected $fillable = [
         'name_role_master',

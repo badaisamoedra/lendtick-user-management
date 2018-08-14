@@ -103,6 +103,78 @@
                     }
                 }
             }
+        },
+        "/reg": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Registration",
+                "description": "Register Lendtick",
+                "operationId": "reg",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "formData",
+                        "description": "Name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "company",
+                        "in": "formData",
+                        "description": "Company code from list",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "identity_photo",
+                        "in": "formData",
+                        "description": "Base64 jpg of identity",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "company_identity_photo",
+                        "in": "formData",
+                        "description": "Base64 jpg of company identity",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "phone_number",
+                        "in": "formData",
+                        "description": "Phone Number",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "email",
+                        "in": "formData",
+                        "description": "Email new user",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "personal_photo",
+                        "in": "formData",
+                        "description": "Base64 jpg of self photo",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful"
+                    }
+                }
+            }
         }
     },
     "definitions": {}
