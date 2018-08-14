@@ -41,6 +41,6 @@ class CompanyController extends Controller
             $res = false;
             $code = $e->getCode();
         }
-        return Response()->json(Api::response($res,"List Company", $res?$res:[]),isset($code)?$code:200);
+        return Response()->json(Api::response($res?true:false,"List Company", $res?$res:[]),isset($code)?$code:200);
     }
 }
