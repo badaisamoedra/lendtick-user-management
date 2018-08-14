@@ -24,6 +24,7 @@ $router->post('/auth', 'AuthController@auth');
 $router->get('/auth/check', 'AuthController@check');
 $router->get('/auth/refresh', 'AuthController@refresh');
 $router->post('/reg', 'UsersController@register');
+$router->get('/company/get', 'CompanyController@get');
 
 $router->group(['middleware'=>['authorize']], function() use($router){
 });
