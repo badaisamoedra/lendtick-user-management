@@ -117,8 +117,9 @@ class AuthController extends Controller
             return response()->json(Api::response(false,$e->getMessage(),isset($token)?['token'=>'Bearer '.$token]:null), 401);
         }
 
+        $data = JWTAuth::toUser($request->header('Autorization'))->only(["id_user","id_role_master","username"]);
         // the token is valid and we have found the user via the sub claim
-        return response()->json(Api::response(true,"Valid Token"));
+        return response()->json(Api::response(true,"Valid Token",$data));
     }
 
     /**
