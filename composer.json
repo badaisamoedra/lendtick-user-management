@@ -9,7 +9,8 @@
         "laravel/lumen-framework": "5.5.*",
         "vlucas/phpdotenv": "~2.2",
         "tymon/jwt-auth": "^1.0@dev",
-        "darkaonline/swagger-lume": "5.5.*"
+        "darkaonline/swagger-lume": "5.5.*",
+        "microsoft/azure-storage-blob": "^1.2"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

@@ -190,6 +190,43 @@
                     }
                 }
             }
+        },
+        "/user/approve": {
+            "put": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Approve User",
+                "description": "Register Lendtick",
+                "operationId": "reg",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token Bearer",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "_method",
+                        "in": "formData",
+                        "description": "Authorization Token Bearer",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful"
+                    }
+                }
+            }
         }
     },
     "definitions": {}

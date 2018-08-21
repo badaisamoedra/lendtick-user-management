@@ -27,4 +27,24 @@ $router->post('/reg', 'UsersController@register');
 $router->get('/company/get', 'CompanyController@get');
 
 $router->group(['middleware'=>['authorize']], function() use($router){
+
+    $router->group(['prefix'=>'user'], function() use($router){
+        // approval by HR & Koperasi
+        $router->put('approve', function(){
+            dd('ok');
+        });
+    });
+
+    $router->post('/pu', function(Illuminate\Http\Request $request, App\Helpers\BlobStorage $blob) use($router){
+        $blob::data([
+            'source' => 'https://upload.wikimedia.org/wikipedia/en/thumb/a/a6/Goofy.svg/330px-Goofy.svg.png',
+            'path' => 'goofy.png'
+        ]);
+        if(!($res=$blob::upload()))
+            dd($blob::error());
+        else{
+            // print_r($res); die();
+            return response()->json($res,200);
+        }
+    });
 });

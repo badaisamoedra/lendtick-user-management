@@ -23,7 +23,7 @@ class AuthenticateMiddleware
             if(!$token)
                 throw New Exception('Unauthorized',401);
                 // $r = (object) RestCurl::exec('GET',env('AUTH_URI',null),[],$token);
-                $r = (object) RestCurl::exec('GET','https://lentick-api-user-management-dev.azurewebsites.net/auth/check',[],$token);
+                $r = (object) RestCurl::exec('GET','http://user.api/auth/check',[],$token);
             if($r->status !== 200){
                 $head = explode("\r\n",$r->header);
                 throw New Exception(substr($head[0],13),$r->status);

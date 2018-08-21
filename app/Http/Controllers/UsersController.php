@@ -12,6 +12,7 @@ use App\Models\Master\WorkflowMaster AS Workflow;
 use Illuminate\Hashing\BcryptHasher AS Hash;
 use App\Helpers\Api;
 use App\Helpers\Template;
+use App\Helpers\BlobStorage;
 
 class UsersController extends Controller
 {
@@ -105,17 +106,48 @@ class UsersController extends Controller
                 if(is_null($user->id_user)){
                     if($res = $user->save()){
                         $id = $user->id_user;
+
+                        // upload Identity
+                        $identity_path = null;
+                        $blob = new BlobStorage;
+                        $blob::data([
+                            'source' => $data['identity_photo'],
+                            'path' => $id."/doc/"
+                        ]);
+                        if($res=$blob::upload())
+                            $identity_path = $res['data']['link'];
+
+                        // upload Identity
+                        $personal_path = null;
+                        $blob = new BlobStorage;
+                        $blob::data([
+                            'source' => $data['personal_photo'],
+                            'path' => $id."/img/"
+                        ]);
+                        if($res=$blob::upload())
+                            $personal_path = $res['data']['link'];
+
                         // try{
                             // Data profile
-                            $profile = Profile::firstOrNew(['id_user' => $id], ['name' => $data['name'], 'personal_identity_path' => "asdfg.jpg", 'phone_number'=> $data['phone_number'], 'email' => $data['email']]);
+                            $profile = Profile::firstOrNew(['id_user' => $id], ['name' => $data['name'], 'personal_identity_path' => $identity_path, 'phone_number'=> $data['phone_number'], 'email' => $data['email'], 'personal_photo' => $personal_path]);
                             if(is_null($profile->id_user_profile)){
                                 if($res = $profile->save())
                                     $id_prof = $profile->id_user_profile;
                             }
 
+
+                        $company_path = null;
+                        $blob = new BlobStorage;
+                        $blob::data([
+                            'source' => $data['company_identity_photo'],
+                            'path' => $id."/doc/"
+                        ]);
+                        if($res=$blob::upload())
+                            $company_path = $res['data']['link'];
+
                             // Data Company
                             if(isset($id_prof)){
-                                $company = Company::firstOrNew(['id_user_profile' => $id_prof],['company_identity_path' => "hjaksdas.jpg", 'id_company' => $data['company']]);
+                                $company = Company::firstOrNew(['id_user_profile' => $id_prof],['company_identity_path' => $company_path, 'id_company' => $data['company']]);
                                 if(is_null($company->id_user_company)){
                                     if($res = $company->save())
                                         $id_comp = $company->id_user_company;
@@ -144,5 +176,40 @@ class UsersController extends Controller
             return response()->json(Api::response(true,"ok"),400);
         }
         return response()->json(Api::response(false,Template::lang('failed')),400);
+    }
+/**
+    * @SWG\Put(
+    *     path="/user/approve",
+    *     consumes={"multipart/form-data"},
+    *     description="Register Lendtick",
+    *     operationId="reg",
+    *     consumes={"application/x-www-form-urlencoded"},
+    *     produces={"application/json"},
+    *     @SWG\Parameter(
+    *         description="Authorization Token Bearer",
+    *         in="header",
+    *         name="Authorization",
+    *         required=true,
+    *         type="string"
+    *     ),
+    *     @SWG\Parameter(
+    *         description="Authorization Token Bearer",
+    *         in="formData",
+    *         name="_method",
+    *         required=true,
+    *         type="string"
+    *     ),
+    *     @SWG\Response(
+    *         response="200",
+    *         description="successful"
+    *     ),
+    *     summary="Approve User",
+    *     tags={
+    *         "User"
+    *     }
+    * )
+    * */
+    public function approve(Request $r, $id, $step){
+        return response()->json(Api::response(true,Template::lang('success'),['id'=>$id,'step'=>$step]),200);
     }
 }

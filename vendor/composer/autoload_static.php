@@ -12,6 +12,9 @@ class ComposerStaticInit447381d6730de6e3b7197115a771441d
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         '72579e7bd17821bb1321b87411366eae' => __DIR__ . '/..' . '/illuminate/support/helpers.php',
         '1d1b89d124cc9cb8219922c9d5569199' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest.php',
+        'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
+        'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
+        '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
         '253c157292f75eb38082b5acb06f3f01' => __DIR__ . '/..' . '/nikic/fast-route/src/functions.php',
         'bd9634f2d41831496de0d3dfe4c94881' => __DIR__ . '/..' . '/symfony/polyfill-php56/bootstrap.php',
         'bee9632da3ca00a99623b9c35d0c4f8b' => __DIR__ . '/..' . '/laravel/lumen-framework/src/helpers.php',
@@ -55,6 +58,7 @@ class ComposerStaticInit447381d6730de6e3b7197115a771441d
         array (
             'Psr\\SimpleCache\\' => 16,
             'Psr\\Log\\' => 8,
+            'Psr\\Http\\Message\\' => 17,
             'Psr\\Container\\' => 14,
         ),
         'N' => 
@@ -64,6 +68,8 @@ class ComposerStaticInit447381d6730de6e3b7197115a771441d
         'M' => 
         array (
             'Monolog\\' => 8,
+            'MicrosoftAzure\\Storage\\Common\\' => 30,
+            'MicrosoftAzure\\Storage\\Blob\\' => 28,
         ),
         'L' => 
         array (
@@ -94,6 +100,12 @@ class ComposerStaticInit447381d6730de6e3b7197115a771441d
             'Illuminate\\Bus\\' => 15,
             'Illuminate\\Broadcasting\\' => 24,
             'Illuminate\\Auth\\' => 16,
+        ),
+        'G' => 
+        array (
+            'GuzzleHttp\\Psr7\\' => 16,
+            'GuzzleHttp\\Promise\\' => 19,
+            'GuzzleHttp\\' => 11,
         ),
         'F' => 
         array (
@@ -201,6 +213,10 @@ class ComposerStaticInit447381d6730de6e3b7197115a771441d
         array (
             0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
         ),
+        'Psr\\Http\\Message\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/http-message/src',
+        ),
         'Psr\\Container\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/container/src',
@@ -212,6 +228,14 @@ class ComposerStaticInit447381d6730de6e3b7197115a771441d
         'Monolog\\' => 
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
+        ),
+        'MicrosoftAzure\\Storage\\Common\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/microsoft/azure-storage-common/src/Common',
+        ),
+        'MicrosoftAzure\\Storage\\Blob\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/microsoft/azure-storage-blob/src/Blob',
         ),
         'Lcobucci\\JWT\\' => 
         array (
@@ -308,6 +332,18 @@ class ComposerStaticInit447381d6730de6e3b7197115a771441d
         'Illuminate\\Auth\\' => 
         array (
             0 => __DIR__ . '/..' . '/illuminate/auth',
+        ),
+        'GuzzleHttp\\Psr7\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/guzzlehttp/psr7/src',
+        ),
+        'GuzzleHttp\\Promise\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/guzzlehttp/promises/src',
+        ),
+        'GuzzleHttp\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
         ),
         'FastRoute\\' => 
         array (
