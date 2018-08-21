@@ -147,7 +147,7 @@ class UsersController extends Controller
 
                             // Data Company
                             if(isset($id_prof)){
-                                $company = Company::firstOrNew(['id_user_profile' => $id_prof],['company_identity_path' => $company_path, 'id_company' => $data['company']]);
+                                $company = Company::firstOrNew(['id_user_profile' => $id_prof],['company_identity_path' => $company_path, 'id_company' => $data['company'], 'id_grade' => 'GRD001', 'id_workflow_status' => 'EMPSTS01']);
                                 if(is_null($company->id_user_company)){
                                     if($res = $company->save())
                                         $id_comp = $company->id_user_company;
