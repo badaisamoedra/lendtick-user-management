@@ -202,24 +202,21 @@ class UsersController extends Controller
     *         required=true,
     *         type="string"
     *     ),
-    *     @SWG\Parameter(
-    *         description="Authorization Token Bearer",
-    *         in="formData",
-    *         name="_method",
-    *         required=true,
-    *         type="string"
-    *     ),
     *     @SWG\Response(
     *         response="200",
     *         description="successful"
     *     ),
     *     summary="Approve User",
     *     tags={
-    *         "User"
+    *         "Flow Approval"
     *     }
     * )
     * */
     public function approve(Request $r, $id, $step){
         return response()->json(Api::response(true,Template::lang('success'),['id'=>$id,'step'=>$step]),200);
+    }
+
+    public function approve_list(){
+        return RegisterFlowRepo::approve_list();
     }
 }

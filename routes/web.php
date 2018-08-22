@@ -27,6 +27,8 @@ $router->post('/reg', 'UsersController@register');
 $router->get('/company/get', 'CompanyController@get');
 
 $router->group(['middleware'=>['authorize']], function() use($router){
+    // list approval user
+    $router->get('/user/approve/list', 'UsersController@approve_list');
 
     $router->group(['prefix'=>'user'], function() use($router){
         // approval by HR & Koperasi

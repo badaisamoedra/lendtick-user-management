@@ -22,11 +22,12 @@ class AuthenticateMiddleware
             $token = $request->header('Authorization');
             if(!$token)
                 throw New Exception('Unauthorized',401);
-                // $r = (object) RestCurl::exec('GET',env('AUTH_URI',null),[],$token);
-                $r = (object) RestCurl::exec('GET','http://user.api/auth/check',[],$token);
+            $r = (object) RestCurl::exec('GET',env('AUTH_URI',null),[],$token);
+
             if($r->status !== 200){
-                $head = explode("\r\n",$r->header);
-                throw New Exception(substr($head[0],13),$r->status);
+                return response()->json(Api::response($r->data->status, $r->data->message,$r->data->data),$r->status);
+                // $head = explode("\r\n",$r->header);
+                // throw New Exception(substr($head[0],13),$r->status);
             }  
         } catch(Exception $e){
             $status = $e->getCode() ? $e->getCode() : 500; 

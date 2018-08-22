@@ -194,7 +194,7 @@
         "/user/approve": {
             "put": {
                 "tags": [
-                    "User"
+                    "Flow Approval"
                 ],
                 "summary": "Approve User",
                 "description": "Register Lendtick",
@@ -209,13 +209,6 @@
                     {
                         "name": "Authorization",
                         "in": "header",
-                        "description": "Authorization Token Bearer",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "_method",
-                        "in": "formData",
                         "description": "Authorization Token Bearer",
                         "required": true,
                         "type": "string"
