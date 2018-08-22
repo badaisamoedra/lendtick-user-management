@@ -81,13 +81,7 @@ class AuthController extends Controller
     *     description="Check Token Lendtick",
     *     operationId="checkAuth",
     *     produces={"application/json"},
-    *     @SWG\Parameter(
-    *         name="Authorization",
-    *         in="header",
-    *         description="Token Authorization",
-    *         required=true,
-    *         type="string",
-    *     ),
+    *     security={{"Bearer":{}}},
     *     @SWG\Response(
     *         response="200",
     *         description="successful"
@@ -128,13 +122,7 @@ class AuthController extends Controller
     *     description="Refresh Token Lendtick",
     *     operationId="refreshAuth",
     *     produces={"application/json"},
-    *     @SWG\Parameter(
-    *         name="Authorization",
-    *         in="header",
-    *         description="Token Authorization",
-    *         required=true,
-    *         type="string",
-    *     ),
+    *     security={{"Bearer":{}}},
     *     @SWG\Response(
     *         response="200",
     *         description="successful"

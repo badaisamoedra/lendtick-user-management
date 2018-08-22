@@ -11,6 +11,10 @@ class VersionsController extends Controller
      */
 
     /**
+     * @SWG\Parameter(parameter="Authorization", name="Authorization", type="string", in="header", required=true)
+    */
+
+    /**
      * @SWG\Swagger(
      *     basePath="/",
      *     schemes={"http","https"},
@@ -20,6 +24,12 @@ class VersionsController extends Controller
      *         @SWG\Contact(
      *             email="faujiakbar@gmail.com"
      *         ),
+     *     ),
+     *     @SWG\SecurityScheme(
+     *         securityDefinition="Bearer",
+     *         type="apiKey",
+     *         name="Authorization",
+     *         in="header"
      *     )
      * )
      */

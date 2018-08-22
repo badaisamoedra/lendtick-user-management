@@ -111,5 +111,12 @@ class RegisterMemberFlowRepo{
         }catch(QueryException $e){
             throw new \Exception($e->getMessage(), 500);
         }
-    }
+	}
+	
+	public static function approve_list($d=null,$s=0,$l=10){
+		if(is_numeric($s) && is_numeric($l) && !is_null($d)){
+			return true;
+		}
+		return [];
+	} 
 }

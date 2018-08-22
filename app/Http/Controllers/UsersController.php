@@ -187,21 +187,16 @@ class UsersController extends Controller
         }
         return response()->json(Api::response(false,Template::lang('failed')),400);
     }
-/**
+
+    /**
     * @SWG\Put(
     *     path="/user/approve",
     *     consumes={"multipart/form-data"},
     *     description="Register Lendtick",
-    *     operationId="reg",
+    *     operationId="user",
     *     consumes={"application/x-www-form-urlencoded"},
     *     produces={"application/json"},
-    *     @SWG\Parameter(
-    *         description="Authorization Token Bearer",
-    *         in="header",
-    *         name="Authorization",
-    *         required=true,
-    *         type="string"
-    *     ),
+    *     security={{"Bearer":{}}},
     *     @SWG\Response(
     *         response="200",
     *         description="successful"
@@ -215,7 +210,26 @@ class UsersController extends Controller
     public function approve(Request $r, $id, $step){
         return response()->json(Api::response(true,Template::lang('success'),['id'=>$id,'step'=>$step]),200);
     }
-
+    
+    /**
+    * @SWG\Get(
+    *     path="/user/approve/list",
+    *     consumes={"multipart/form-data"},
+    *     description="Approval list for BE",
+    *     operationId="approvelist",
+    *     consumes={"application/x-www-form-urlencoded"},
+    *     produces={"application/json"},
+    *     security={{"Bearer":{}}},
+    *     @SWG\Response(
+    *         response="200",
+    *         description="successful"
+    *     ),
+    *     summary="List Approve User",
+    *     tags={
+    *         "Flow Approval"
+    *     }
+    * )
+    * */
     public function approve_list(){
         return RegisterFlowRepo::approve_list();
     }

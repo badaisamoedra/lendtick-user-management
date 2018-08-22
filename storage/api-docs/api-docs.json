@@ -61,20 +61,16 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "name": "Authorization",
-                        "in": "header",
-                        "description": "Token Authorization",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
                 "responses": {
                     "200": {
                         "description": "successful"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
             }
         },
         "/auth/refresh": {
@@ -88,20 +84,16 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "name": "Authorization",
-                        "in": "header",
-                        "description": "Token Authorization",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
                 "responses": {
                     "200": {
                         "description": "successful"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
             }
         },
         "/company/get": {
@@ -198,29 +190,66 @@
                 ],
                 "summary": "Approve User",
                 "description": "Register Lendtick",
-                "operationId": "reg",
+                "operationId": "user",
                 "consumes": [
                     "application/x-www-form-urlencoded"
                 ],
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "name": "Authorization",
-                        "in": "header",
-                        "description": "Authorization Token Bearer",
-                        "required": true,
-                        "type": "string"
+                "responses": {
+                    "200": {
+                        "description": "successful"
                     }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/user/approve/list": {
+            "get": {
+                "tags": [
+                    "Flow Approval"
+                ],
+                "summary": "List Approve User",
+                "description": "Approval list for BE",
+                "operationId": "approvelist",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
                 ],
                 "responses": {
                     "200": {
                         "description": "successful"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
             }
         }
     },
-    "definitions": {}
+    "definitions": {},
+    "parameters": {
+        "Authorization": {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+        }
+    },
+    "securityDefinitions": {
+        "Bearer": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
+    }
 }
