@@ -7,8 +7,10 @@ use App\Models\User\UserManagement AS User;
 use App\Models\User\ProfileManagement AS Profile;
 use App\Models\User\CompanyManagement AS Company;
 use App\Models\User\AuthCompanyManagement AS AuthCompany;
+use App\Models\User\RegisterMemberFlowManagement AS RegisterFlow;
 use App\Models\Master\RoleMaster AS Role;
 use App\Models\Master\WorkflowMaster AS Workflow;
+use App\Repositories\User\RegisterMemberFlowRepo AS RegisterFlowRepo;
 use Illuminate\Hashing\BcryptHasher AS Hash;
 use App\Helpers\Api;
 use App\Helpers\Template;
@@ -147,7 +149,7 @@ class UsersController extends Controller
 
                             // Data Company
                             if(isset($id_prof)){
-                                $company = Company::firstOrNew(['id_user_profile' => $id_prof],['company_identity_path' => $company_path, 'id_company' => $data['company'], 'id_grade' => 'GRD001', 'id_workflow_status' => 'EMPSTS01']);
+                                $company = Company::firstOrNew(['id_user_profile' => $id_prof],['company_identity_path' => $company_path, 'id_company' => $data['company'], 'id_grade' => 'GRD000', 'id_workflow_status' => 'MBRSTS00']);
                                 if(is_null($company->id_user_company)){
                                     if($res = $company->save())
                                         $id_comp = $company->id_user_company;
@@ -160,6 +162,14 @@ class UsersController extends Controller
                                 if(is_null($authCompany->id_authorization_company)){
                                     if($res = $authCompany->save())
                                         $id_auth = $authCompany->id_authorization_company;
+                                }
+                            }
+
+                            // Data working approval overflow
+                            if(isset($id)){
+                                $cnt = RegisterFlow::where('id_user','=',$id)->get()->count();
+                                if($cnt == 0){
+                                    RegisterFlowRepo::flow($id);
                                 }
                             }
                         // } catch(Exception $e){

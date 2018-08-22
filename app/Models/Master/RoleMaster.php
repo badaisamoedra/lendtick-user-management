@@ -10,6 +10,7 @@ class RoleMaster extends Model {
     // protected $primaryKey = 'id_master_role';
 
     protected $fillable = [
+        'id_role_master',
         'name_role_master',
         'is_front_end',
         'created_by',
