@@ -48,6 +48,8 @@ class Handler extends ExceptionHandler
     {
         // dd($e->getMessage());
         // return parent::render($request, $e);
+        // if ($exception instanceof ValidationException)
+        // return response()->json(['message' => 'Os dados fornecidos não são válidos.', 'errors' => $exception->validator->getMessageBag()], 422);
         $message = $e->getStatusCode()==405?"Method Not Allowed":$e->getMessage();
         return response()->json(Api::response(false,$message), $e->getStatusCode());
     }
