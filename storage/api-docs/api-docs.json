@@ -96,6 +96,50 @@
                 ]
             }
         },
+        "/web/svc-user/public/change-password": {
+            "put": {
+                "tags": [
+                    "Configuration"
+                ],
+                "summary": "Configuration",
+                "description": "Upload content to azure blob storage",
+                "operationId": "auth",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "username",
+                        "in": "query",
+                        "description": "Username",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "old_password",
+                        "in": "query",
+                        "description": "old_password",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "new_password",
+                        "in": "query",
+                        "description": "new_password",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful"
+                    }
+                }
+            }
+        },
         "/company/get": {
             "get": {
                 "tags": [

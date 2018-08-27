@@ -50,3 +50,9 @@ $router->group(['middleware'=>['authorize']], function() use($router){
         }
     });
 });
+
+## enhance from lutfi 
+// change password 
+
+$router->put('change-password', 'ChangePasswordController@get');
+
