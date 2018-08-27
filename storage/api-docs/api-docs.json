@@ -96,7 +96,7 @@
                 ]
             }
         },
-        "/web/svc-user/public/change-password": {
+        "/change-password": {
             "put": {
                 "tags": [
                     "Configuration"

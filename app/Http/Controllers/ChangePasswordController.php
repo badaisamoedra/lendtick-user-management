@@ -21,7 +21,7 @@ class ChangePasswordController extends Controller
 
     /**
     * @SWG\Put(
-    *     path="/web/svc-user/public/change-password", 
+    *     path="/change-password", 
     *     description="Upload content to azure blob storage",
     *     operationId="auth",
     *     consumes={"application/json"},

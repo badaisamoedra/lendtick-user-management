@@ -6,7 +6,7 @@ use App\Models\User\UserManagement as UserManagement;
 use Illuminate\Database\QueryException; 
 use DB;
 
-class ConfigureRepo{ 
+class ConfigureRepo{
 
 	public static function search_auth($username)
 	{
