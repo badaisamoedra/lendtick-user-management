@@ -267,6 +267,29 @@
                 "produces": [
                     "application/json"
                 ],
+                "parameters": [
+                    {
+                        "name": "start",
+                        "in": "query",
+                        "description": "Start row",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "length",
+                        "in": "query",
+                        "description": "Length of get row",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Sort by",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "successful"

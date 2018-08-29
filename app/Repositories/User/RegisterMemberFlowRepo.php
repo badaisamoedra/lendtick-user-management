@@ -113,9 +113,51 @@ class RegisterMemberFlowRepo{
         }
 	}
 	
-	public static function approve_list($d=null,$s=0,$l=10){
-		if(is_numeric($s) && is_numeric($l) && !is_null($d)){
-			return true;
+	public static function approve_list($request, $d=null,$st=0,$l=10,$sr=null){
+		if(is_numeric($st) && is_numeric($l) && !is_null($d)){
+			$c_all = DB::select(DB::raw("
+				SELECT COUNT(a.id_register_member_flow) AS cnt 
+				FROM [user].[register_member_flow] a 
+				JOIN [user].[master_register_member_flow] b ON a.id_master_register_member_flow=b.id_master_register_member_flow
+				WHERE b.id_role_master='".$request->input('id_role_master')."'"
+			))[0]->cnt;
+
+			// where inidication
+			$where = [];
+			if(is_array($d))
+				foreach($d AS $field => $val){
+					$where[] = $field." = ".(is_string($val)?"'".$val."'":$val);
+				}
+
+			$c_fil = DB::select(DB::raw("
+				SELECT COUNT(a.id_register_member_flow) AS cnt 
+				FROM [user].[register_member_flow] a 
+				JOIN [user].[master_register_member_flow] b ON a.id_master_register_member_flow=b.id_master_register_member_flow
+				WHERE b.id_role_master='".$request->input('id_role_master')."' ".(count($where)>0?"AND (".implode(' AND ', $where).")":"")
+			))[0]->cnt;
+
+			// order by
+			if(is_array($sr)){
+				$order = "";
+				$tmp = [];
+				foreach($sr AS $k => $v){
+					if(is_numeric($k)){
+						$tmp[] = $v;
+					} else
+						$tmp[] = $k." ".$v;
+				}
+				if(count($tmp) > 0)
+					$order .= "ORDER BY ".implode(", ",$tmp);
+			}
+
+			$data = DB::select(DB::raw("
+				SELECT * 
+				FROM [user].[register_member_flow] a 
+				JOIN [user].[master_register_member_flow] b ON a.id_master_register_member_flow=b.id_master_register_member_flow
+				WHERE b.id_role_master='".$request->input('id_role_master')."' ".(count($where)?"AND (".implode(' AND ', $where).")":"")." ".$order
+			));
+
+			return ['count_all'=>$c_all,'count_filter'=>$c_fil,'data'=>$data];
 		}
 		return [];
 	} 
