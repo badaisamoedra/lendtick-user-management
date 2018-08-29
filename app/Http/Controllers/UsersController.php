@@ -220,6 +220,27 @@ class UsersController extends Controller
     *     consumes={"application/x-www-form-urlencoded"},
     *     produces={"application/json"},
     *     security={{"Bearer":{}}},
+    *     @SWG\Parameter(
+    *         description="Start row",
+    *         in="query",
+    *         name="start",
+    *         required=true,
+    *         type="string"
+    *     ),
+    *     @SWG\Parameter(
+    *         description="Length of get row",
+    *         in="query",
+    *         name="length",
+    *         required=true,
+    *         type="string"
+    *     ),
+    *     @SWG\Parameter(
+    *         description="Sort by",
+    *         in="query",
+    *         name="sort",
+    *         required=true,
+    *         type="string",
+    *     ),
     *     @SWG\Response(
     *         response="200",
     *         description="successful"
@@ -230,7 +251,11 @@ class UsersController extends Controller
     *     }
     * )
     * */
-    public function approve_list(){
-        return RegisterFlowRepo::approve_list();
+    public function approve_list(Request $r){
+        $start = $r->input('start');
+        $length = $r->input('length');
+        $sort = (array) json_decode($r->input('sort'));
+        $where = [];
+        return response()->json(Api::response(true,Template::lang('success'),RegisterFlowRepo::approve_list($r, $where, $start, $length, $sort)),200);
     }
 }

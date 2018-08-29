@@ -33,6 +33,10 @@ class AuthenticateMiddleware
             $status = $e->getCode() ? $e->getCode() : 500; 
             return response()->json(Api::response(false, $e->getMessage()),$status);
         }
+
+        if(isset($r))
+            $request->merge((array)$r->data->data);
+
         return $next($request);
     }
 }
