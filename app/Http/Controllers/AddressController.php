@@ -148,6 +148,27 @@ class AddressController extends Controller
         return Response()->json(Api::response($res?true:false,$Message, $res?$res:[]),isset($code)?$code:200);
     }
 
+
+    /// delete address of user 
+     public function DeleteAddressOfUser(Request $request){
+        try{ 
+            if(empty($request->json())) throw New \Exception('Params not found', 500);
+
+            $this->validate($request, [
+                'id_user_address'       => 'required'
+            ]);  
+
+            $id_user = $request->id_user; // from JWT Token Middleware
+            $res = $this->AddressRepo->delete_byuser($id_user , $request->id_user_address);
+            $Message = 'Berhasil';
+        } catch(Exception $e) {
+            $res = false;
+            $Message = $e->getMessage();
+            $code = 400;
+        }
+        return Response()->json(Api::response($res?true:false,$Message, $res?$res:[]),isset($code)?$code:200);
+    }
+
     
 
 }
