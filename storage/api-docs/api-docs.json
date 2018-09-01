@@ -13,6 +13,29 @@
         "https"
     ],
     "paths": {
+        "/web/svc-user/public/profile/get-address-by-user": {
+            "get": {
+                "tags": [
+                    "Profile"
+                ],
+                "summary": "Refresh Authentication",
+                "description": "Get User Address of User",
+                "operationId": "Address",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
         "/auth": {
             "post": {
                 "tags": [

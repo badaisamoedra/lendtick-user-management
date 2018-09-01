@@ -49,10 +49,15 @@ $router->group(['middleware'=>['authorize']], function() use($router){
             return response()->json($res,200);
         }
     });
+
+    // get address of user 
+    $router->group(['prefix'=>'profile'], function() use($router){
+        $router->get('get-address-by-user', 'AddressController@GetListAddressOfUser');
+    });
 });
 
 ## enhance from lutfi 
 // change password 
-
 $router->put('change-password', 'ChangePasswordController@get');
+
 
