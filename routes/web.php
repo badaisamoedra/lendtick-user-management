@@ -52,10 +52,14 @@ $router->group(['middleware'=>['authorize']], function() use($router){
 
     // get address of user 
     $router->group(['prefix'=>'profile'], function() use($router){
+        // address
         $router->get('get-address-by-user', 'AddressController@GetListAddressOfUser');
         $router->put('update-address-by-user', 'AddressController@UpdateAddressOfUser');
         $router->post('create-address-by-user', 'AddressController@CreateAddressOfUser');
         $router->post('delete-address-by-user', 'AddressController@DeleteAddressOfUser');
+
+        // profile 
+        $router->get('get', 'ProfileController@GetUserProfile');
     });
 });
 
