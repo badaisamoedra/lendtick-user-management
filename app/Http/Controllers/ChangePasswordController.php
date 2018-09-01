@@ -73,9 +73,8 @@ class ChangePasswordController extends Controller
                 'new_password'      => 'required|max:8'
             ]);  
             
-            $check_pass = ($data = ConfigurationRepo::search_auth($request->username)) ? $hash->check($request->old_password, $data->password) : false;
-
-
+            $check_pass = ($data = ConfigurationRepo::search_auth($request->username)) ? $hash->check($request->old_password, $data->password) : false; 
+            
             if ($check_pass) {
                 // mulai mengganti password dengan password baru. 
                $run_change_pass = ConfigurationRepo::change_password($data->id_user,  $request->username , $hash->make($request->new_password));
@@ -84,9 +83,7 @@ class ChangePasswordController extends Controller
                     $res = [];
                } else { 
                     throw New Exception("Ada kesalahan", 400);
-               }
-                //$request->new_password;
-                // $pass = $h->make('kop2018');
+               } 
             } else {
                 throw New Exception("Password lama tidak sesuai", 400); 
             }
