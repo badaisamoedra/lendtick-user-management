@@ -1,4 +1,6 @@
+
 {
+
     "swagger": "2.0",
     "info": {
         "title": "User - Lendtick",
@@ -13,7 +15,7 @@
         "https"
     ],
     "paths": {
-         "/profile/update-address-by-user": {
+        "/profile/update-address-by-user": {
             "put": {
                 "tags": [
                     "Profile"
@@ -76,12 +78,22 @@
                                     "type": "string",
                                     "example": "address_latitude"
                                 }
-
                             },
-                            "required": ["id_user_address","receiver_name","address_text","city_or_district","postal_code","receiver_phone","address_longitude","address_latlong_text","address_latitude"],
+                            "required": [
+                                "id_user_address",
+                                "receiver_name",
+                                "address_text",
+                                "city_or_district",
+                                "postal_code",
+                                "receiver_phone",
+                                "address_longitude",
+                                "address_latlong_text",
+                                "address_latitude"
+                            ],
                             "$schema": "http://json-schema.org/draft-04/schema#"
                         }
-                    }],
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": ""
@@ -89,12 +101,12 @@
                 },
                 "security": [
                     {
-                        "Bearer": []
+                        "Bearer": [ ]
                     }
                 ]
             }
         },
-        "/profile/create-address-by-user":{
+        "/profile/create-address-by-user": {
             "post": {
                 "tags": [
                     "Profile"
@@ -153,12 +165,22 @@
                                     "type": "string",
                                     "example": "address_latitude"
                                 }
-
                             },
-                            "required": ["address_name","receiver_name","address_text","city_or_district","postal_code","receiver_phone","address_longitude","address_latlong_text","address_latitude"],
+                            "required": [
+                                "address_name",
+                                "receiver_name",
+                                "address_text",
+                                "city_or_district",
+                                "postal_code",
+                                "receiver_phone",
+                                "address_longitude",
+                                "address_latlong_text",
+                                "address_latitude"
+                            ],
                             "$schema": "http://json-schema.org/draft-04/schema#"
                         }
-                    }],
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": ""
@@ -166,7 +188,7 @@
                 },
                 "security": [
                     {
-                        "Bearer": []
+                        "Bearer": [ ]
                     }
                 ]
             }
@@ -193,16 +215,19 @@
                         "required": true,
                         "schema": {
                             "type": "object",
-                            "properties": { 
+                            "properties": {
                                 "id_user_address": {
                                     "type": "integer",
                                     "example": 8
                                 }
                             },
-                            "required": ["id_user_address"],
+                            "required": [
+                                "id_user_address"
+                            ],
                             "$schema": "http://json-schema.org/draft-04/schema#"
                         }
-                    }],
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": ""
@@ -210,11 +235,11 @@
                 },
                 "security": [
                     {
-                        "Bearer": []
+                        "Bearer": [ ]
                     }
                 ]
             }
-        }, 
+        },
         "/profile/get-address-by-user": {
             "get": {
                 "tags": [
@@ -233,7 +258,7 @@
                 },
                 "security": [
                     {
-                        "Bearer": []
+                        "Bearer": [ ]
                     }
                 ]
             }
@@ -293,7 +318,7 @@
                 },
                 "security": [
                     {
-                        "Bearer": []
+                        "Bearer": [ ]
                     }
                 ]
             }
@@ -316,7 +341,7 @@
                 },
                 "security": [
                     {
-                        "Bearer": []
+                        "Bearer": [ ]
                     }
                 ]
             }
@@ -398,7 +423,7 @@
                 },
                 "security": [
                     {
-                        "Bearer": []
+                        "Bearer": [ ]
                     }
                 ]
             }
@@ -421,7 +446,7 @@
                 },
                 "security": [
                     {
-                        "Bearer": []
+                        "Bearer": [ ]
                     }
                 ]
             }
@@ -444,7 +469,7 @@
                 },
                 "security": [
                     {
-                        "Bearer": []
+                        "Bearer": [ ]
                     }
                 ]
             }
@@ -467,7 +492,7 @@
                 },
                 "security": [
                     {
-                        "Bearer": []
+                        "Bearer": [ ]
                     }
                 ]
             }
@@ -490,7 +515,7 @@
                 },
                 "security": [
                     {
-                        "Bearer": []
+                        "Bearer": [ ]
                     }
                 ]
             }
@@ -588,7 +613,7 @@
                 },
                 "security": [
                     {
-                        "Bearer": []
+                        "Bearer": [ ]
                     }
                 ]
             }
@@ -637,13 +662,13 @@
                 },
                 "security": [
                     {
-                        "Bearer": []
+                        "Bearer": [ ]
                     }
                 ]
             }
         }
     },
-    "definitions": {},
+    "definitions": { },
     "parameters": {
         "Authorization": {
             "name": "Authorization",
@@ -659,4 +684,5 @@
             "in": "header"
         }
     }
+
 }

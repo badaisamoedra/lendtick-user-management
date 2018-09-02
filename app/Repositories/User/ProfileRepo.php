@@ -17,5 +17,16 @@ class ProfileRepo {
 		}catch(QueryException $e){
 			throw new \Exception($e->getMessage(), 500);
 		}
-	}  
+	}
+
+	public function getnik(){
+		try { 
+			return DB::table('user.user_profile')
+			->select(DB::raw('max(id_koperasi) as NIK'))
+			->first();
+		}catch(QueryException $e){
+			throw new \Exception($e->getMessage(), 500);
+		}
+	}
+
 }
