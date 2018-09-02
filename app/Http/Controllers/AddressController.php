@@ -15,7 +15,7 @@ class AddressController extends Controller
 
     /**
     * @SWG\Get(
-    *     path="/web/svc-user/public/profile/get-address-by-user",
+    *     path="/profile/get-address-by-user",
     *     description="Get User Address of User",
     *     operationId="Address",
     *     produces={"application/json"},

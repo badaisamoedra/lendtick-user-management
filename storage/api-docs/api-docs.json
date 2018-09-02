@@ -13,7 +13,7 @@
         "https"
     ],
     "paths": {
-        "/profile/update-address-by-user": {
+         "/profile/update-address-by-user": {
             "put": {
                 "tags": [
                     "Profile"
@@ -214,7 +214,7 @@
                     }
                 ]
             }
-        },
+        }, 
         "/profile/get-address-by-user": {
             "get": {
                 "tags": [
@@ -222,7 +222,7 @@
                 ],
                 "summary": "Get List Address of User",
                 "description": "Get User Address of User",
-                "operationId": "AddressByUser",
+                "operationId": "Address",
                 "produces": [
                     "application/json"
                 ],
@@ -380,7 +380,99 @@
                 }
             }
         },
-        "/web/svc-user/public/profile/get": {
+        "/dashboard/get-completed-by-sbu-hr": {
+            "get": {
+                "tags": [
+                    "Dashboard"
+                ],
+                "summary": "Get Total User Completed By SBUHR",
+                "description": "Get Total User Completed By SBUHR",
+                "operationId": "TotalUserCompletedBySBUHR",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/dashboard/get-completed-by-kopadmin": {
+            "get": {
+                "tags": [
+                    "Dashboard"
+                ],
+                "summary": "Get Total User Completed By Kop Admin",
+                "description": "Get Total User Completed By Kop Admin",
+                "operationId": "TotalUserCompletedByKopAdmin",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/dashboard/get-pending-by-sbu-hr": {
+            "get": {
+                "tags": [
+                    "Dashboard"
+                ],
+                "summary": "Get Total User Pending By SBU HR",
+                "description": "Get Total User Pending By SBU HR",
+                "operationId": "TotalUserPendingBySBUHR",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/dashboard/get-pending-by-kopadmin": {
+            "get": {
+                "tags": [
+                    "Dashboard"
+                ],
+                "summary": "Get Total User Pending By Koperasi Admin",
+                "description": "Get Total User Pending By Koperasi Admin",
+                "operationId": "TotalUserPendingByKoperasiAdmin",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/public/profile/get": {
             "get": {
                 "tags": [
                     "Profile"

@@ -15,7 +15,7 @@ class ProfileController extends Controller
 
     /**
     * @SWG\Get(
-    *     path="/web/svc-user/public/profile/get",
+    *     path="/public/profile/get",
     *     description="Get Profile",
     *     operationId="getprofile",
     *     produces={"application/json"},

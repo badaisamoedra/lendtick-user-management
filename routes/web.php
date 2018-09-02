@@ -61,6 +61,16 @@ $router->group(['middleware'=>['authorize']], function() use($router){
         // profile 
         $router->get('get', 'ProfileController@GetUserProfile');
     });
+
+        // dashboard
+     $router->group(['prefix'=>'dashboard'], function() use($router){
+        // get
+        $router->get('get-completed-by-sbu-hr', 'DashboardController@TotalUserCompletedBySBUHR');
+        $router->get('get-completed-by-kopadmin', 'DashboardController@TotalUserCompletedByKopAdmin');
+        $router->get('get-pending-by-sbu-hr', 'DashboardController@TotalUserPendingBySBUHR');
+        $router->get('get-pending-by-kopadmin', 'DashboardController@TotalUserPendingByKoperasiAdmin');
+        
+    });
 });
 
 ## enhance from lutfi 
