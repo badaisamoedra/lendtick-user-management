@@ -62,6 +62,9 @@ $router->group(['middleware'=>['authorize']], function() use($router){
         $router->get('get', 'ProfileController@GetUserProfile');
         // generate nik
         $router->get('generate-nik', 'ProfileController@GenerateNIK');
+
+        // change password 
+        $router->put('change-password', 'ChangePasswordController@get');
     });
 
         // dashboard
@@ -76,7 +79,6 @@ $router->group(['middleware'=>['authorize']], function() use($router){
 });
 
 ## enhance from lutfi 
-// change password 
-$router->put('change-password', 'ChangePasswordController@get');
+
 
 

@@ -21,26 +21,19 @@ class ChangePasswordController extends Controller
 
     /**
     * @SWG\Put(
-    *     path="/change-password", 
+    *     path="/profile/change-password", 
     *     description="Upload content to azure blob storage",
     *     operationId="auth",
     *     consumes={"application/json"},
-    *     produces={"application/json"}, 
+    *     produces={"application/json"},      
     *     @SWG\Parameter(
-    *         description="Username",
-    *         in="query",
-    *         name="username",
-    *         required=true,
-    *         type="string"
-    *     ), 
-     *     @SWG\Parameter(
     *         description="old_password",
     *         in="query",
     *         name="old_password",
     *         required=true,
     *         type="string"
     *     ), 
-     *     @SWG\Parameter(
+    *     @SWG\Parameter(
     *         description="new_password",
     *         in="query",
     *         name="new_password",
@@ -61,26 +54,24 @@ class ChangePasswordController extends Controller
     public function __construct(){
     } 
 
-    public function get(Request $request, hash $hash){
-
-
+    public function get(Request $request, hash $hash){ 
 
         try{
 
             $this->validate($request, [
-                'username'          => 'required',
                 'old_password'      => 'required', 
-                'new_password'      => 'required|max:8'
+                'new_password'      => 'required|max:9'
             ]);  
+
             
-            $check_pass = ($data = ConfigurationRepo::search_auth($request->username)) ? $hash->check($request->old_password, $data->password) : false; 
-            
+            $check_pass = ($data = ConfigurationRepo::search_auth($request->id_user)) ? $hash->check($request->old_password, $data->password) : false; 
+
             if ($check_pass) {
                 // mulai mengganti password dengan password baru. 
-               $run_change_pass = ConfigurationRepo::change_password($data->id_user,  $request->username , $hash->make($request->new_password));
+               $run_change_pass = ConfigurationRepo::change_password($data->id_user,  $request->id_user , $hash->make($request->new_password));
 
                if ($run_change_pass) {
-                    $res = [];
+                    $res = true;
                } else { 
                     throw New Exception("Ada kesalahan", 400);
                } 

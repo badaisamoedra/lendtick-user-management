@@ -12,7 +12,7 @@ class ConfigureRepo{
 	{
 		try {
 
-			$Check =  UserManagement::where('username',$username)->where('deleted_by')->first();
+			$Check =  UserManagement::where('id_user',$username)->where('deleted_by')->first();
 
 			if (count($Check)>0) {
 				return $Check;
@@ -30,8 +30,7 @@ class ConfigureRepo{
 		try {
 
 			if (!empty($username) and !empty($new_password)) {
-				UserManagement::where('username',$username)
-								->where('id_user',$id_user)
+				UserManagement::where('id_user',$id_user)
 								->update(['password' => $new_password]);
 				return true;
 			} else {
