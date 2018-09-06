@@ -8,11 +8,11 @@ use DB;
 
 class ConfigureRepo{
 
-	public static function search_auth($username)
+	public static function search_auth($id_user)
 	{
 		try {
 
-			$Check =  UserManagement::where('id_user',$username)->where('deleted_by')->first();
+			$Check =  UserManagement::where('id_user',$id_user)->first();
 
 			if (count($Check)>0) {
 				return $Check;
