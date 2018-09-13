@@ -7,6 +7,9 @@ use Illuminate\Hashing\BcryptHasher AS hash;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use App\User;
+use App\Models\User\RegisterMemberFlowManagement AS flow;
+use App\Models\Master\RegisterMemberFlowMaster AS mst_flow;
+use App\Models\Master\RoleMaster AS role;
 use App\Helpers\Api;
 
 class AuthController extends Controller
@@ -57,13 +60,22 @@ class AuthController extends Controller
         $credentials = $request->only('username', 'password'); // grab credentials from the request
 
         try {
+            // check user data and grab user data
             $check_pass = ($data = User::where('username',$credentials['username'])->where('deleted_by')->first())?$hash->check($credentials['password'], $data->password):false;
             // check user
             if(!$data) throw New JWTException("User Not Found", 404);
             // check password
             if(!$check_pass) throw New JWTException("Password Invalid", 401);
+            // check role
+            $check_flow = true;
+            if($data){
+                if($data->id_role_master == role::where('name_role_master', 'member')->get()->first()->id_role_master)
+                    $check_flow = (flow::where('id_user',$data->id_user)->whereNotNull('approve_at')->get()->count() == mst_flow::all()->count());
+            }
+            // check flow
+            if(!$check_flow) throw New JWTException("Your account in validation progress", 401);
             // check token
-            if (!$token = JWTAuth::attempt($credentials)) throw New JWTException("Invalid Credential", 401);
+            if(!$token = JWTAuth::attempt($credentials)) throw New JWTException("Invalid Credential", 401);
 
         } catch (JWTException $e) {
             // something went wrong whilst attempting to encode the token
@@ -111,7 +123,7 @@ class AuthController extends Controller
             return response()->json(Api::response(false,$e->getMessage(),isset($token)?['token'=>'Bearer '.$token]:null), 401);
         }
 
-        $data = JWTAuth::toUser($request->header('Autorization'))->only(["id_user","id_role_master","username"]);
+        $data = JWTAuth::toUser($request->header('Autorization'))->only(["id_user","id_role_master","username","is_new"]);
         // the token is valid and we have found the user via the sub claim
         return response()->json(Api::response(true,"Valid Token",$data));
     }

@@ -32,9 +32,7 @@ $router->group(['middleware'=>['authorize']], function() use($router){
 
     $router->group(['prefix'=>'user'], function() use($router){
         // approval by HR & Koperasi
-        $router->put('approve', function(){
-            dd('ok');
-        });
+        $router->put('approve', 'UsersController@approve');
     });
 
     $router->post('/pu', function(Illuminate\Http\Request $request, App\Helpers\BlobStorage $blob) use($router){

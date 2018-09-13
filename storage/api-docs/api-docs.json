@@ -241,6 +241,29 @@
                 "produces": [
                     "application/json"
                 ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "formData",
+                        "description": "ID user",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "grade",
+                        "in": "formData",
+                        "description": "Grade",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "date_in",
+                        "in": "formData",
+                        "description": "Tanggal Masuk",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "successful"
