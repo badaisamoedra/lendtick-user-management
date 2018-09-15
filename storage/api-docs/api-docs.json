@@ -259,7 +259,7 @@
                     {
                         "name": "date_in",
                         "in": "formData",
-                        "description": "Tanggal Masuk",
+                        "description": "Date IN",
                         "required": true,
                         "type": "string"
                     }

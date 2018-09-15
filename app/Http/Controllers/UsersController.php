@@ -228,7 +228,7 @@ class UsersController extends Controller
     *         type="string"
     *     ),
     *     @SWG\Parameter(
-    *         description="Tanggal Masuk",
+    *         description="Date IN",
     *         in="formData",
     *         name="date_in",
     *         required=true,
@@ -268,8 +268,10 @@ class UsersController extends Controller
             if(!empty($grade) && !empty($in) && !is_null($grade) && !is_null($in)){
                 $profile = Profile::where('id_user', $user->id_user)->get()->first();
                 $comp = Company::where('id_user_profile', $profile->id_user_profile)->get()->first();
-                $comp->grade = $grade;
-                $comp->employee_starting_date = $in;
+                if($grade && $in){
+                    $comp->grade = $grade;
+                    $comp->employee_starting_date = $in;
+                }
                 $comp->save();
             }
             // check level for last approval
