@@ -151,7 +151,7 @@ class RegisterMemberFlowRepo{
 			}
 
 			$data = DB::select(DB::raw("
-				SELECT * 
+				SELECT a.*, b.* 
 				FROM [user].[register_member_flow] a 
 				JOIN [user].[master_register_member_flow] b ON a.id_master_register_member_flow=b.id_master_register_member_flow
 				WHERE b.id_role_master='".$request->input('id_role_master')."' ".(count($where)?"AND (".implode(' AND ', $where).")":"")." ".$order
