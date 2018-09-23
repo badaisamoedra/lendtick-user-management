@@ -35,6 +35,11 @@ $router->group(['middleware'=>['authorize']], function() use($router){
         $router->put('approve', 'UsersController@approve');
     });
 
+    $router->group(['prefix'=>'mst'], function() use($router){
+        // get list grade
+        $router->get('grade', 'GradeController@list');
+    });
+
     $router->post('/pu', function(Illuminate\Http\Request $request, App\Helpers\BlobStorage $blob) use($router){
         $blob::data([
             'source' => 'https://upload.wikimedia.org/wikipedia/en/thumb/a/a6/Goofy.svg/330px-Goofy.svg.png',

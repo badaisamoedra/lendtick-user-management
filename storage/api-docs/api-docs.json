@@ -13,231 +13,6 @@
         "https"
     ],
     "paths": {
-         "/profile/update-address-by-user": {
-            "put": {
-                "tags": [
-                    "Profile"
-                ],
-                "summary": "Update-address-by-user",
-                "description": "Update-address-by-user",
-                "operationId": "Update-address-by-user-id",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "",
-                        "required": true,
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "id_user_address": {
-                                    "type": "integer",
-                                    "example": 4
-                                },
-                                "address_name": {
-                                    "type": "string",
-                                    "example": "bojong banget 2"
-                                },
-                                "receiver_name": {
-                                    "type": "string",
-                                    "example": "receiver_name"
-                                },
-                                "address_text": {
-                                    "type": "string",
-                                    "example": "oke banget"
-                                },
-                                "city_or_district": {
-                                    "type": "integer",
-                                    "example": 1000
-                                },
-                                "postal_code": {
-                                    "type": "string",
-                                    "example": "postal_code"
-                                },
-                                "receiver_phone": {
-                                    "type": "string",
-                                    "example": "receiver_phone"
-                                },
-                                "address_longitude": {
-                                    "type": "string",
-                                    "example": "address_longitude"
-                                },
-                                "address_latlong_text": {
-                                    "type": "string",
-                                    "example": "address_latlong_text"
-                                },
-                                "address_latitude": {
-                                    "type": "string",
-                                    "example": "address_latitude"
-                                }
-                            },
-                            "required": [
-                                "id_user_address",
-                                "receiver_name",
-                                "address_text",
-                                "city_or_district",
-                                "postal_code",
-                                "receiver_phone",
-                                "address_longitude",
-                                "address_latlong_text",
-                                "address_latitude"
-                            ],
-                            "$schema": "http://json-schema.org/draft-04/schema#"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": ""
-                    }
-                },
-                "security": [
-                    {
-                        "Bearer": [ ]
-                    }
-                ]
-            }
-        },
-        "/profile/create-address-by-user": {
-            "post": {
-                "tags": [
-                    "Profile"
-                ],
-                "summary": "create-address-by-user",
-                "description": "create-address-by-user",
-                "operationId": "create-address-by-user-id",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "",
-                        "required": true,
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "address_name": {
-                                    "type": "string",
-                                    "example": "bojong banget 2"
-                                },
-                                "receiver_name": {
-                                    "type": "string",
-                                    "example": "receiver_name"
-                                },
-                                "address_text": {
-                                    "type": "string",
-                                    "example": "oke banget"
-                                },
-                                "city_or_district": {
-                                    "type": "integer",
-                                    "example": 1000
-                                },
-                                "postal_code": {
-                                    "type": "string",
-                                    "example": "postal_code"
-                                },
-                                "receiver_phone": {
-                                    "type": "string",
-                                    "example": "receiver_phone"
-                                },
-                                "address_longitude": {
-                                    "type": "string",
-                                    "example": "address_longitude"
-                                },
-                                "address_latlong_text": {
-                                    "type": "string",
-                                    "example": "address_latlong_text"
-                                },
-                                "address_latitude": {
-                                    "type": "string",
-                                    "example": "address_latitude"
-                                }
-                            },
-                            "required": [
-                                "address_name",
-                                "receiver_name",
-                                "address_text",
-                                "city_or_district",
-                                "postal_code",
-                                "receiver_phone",
-                                "address_longitude",
-                                "address_latlong_text",
-                                "address_latitude"
-                            ],
-                            "$schema": "http://json-schema.org/draft-04/schema#"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": ""
-                    }
-                },
-                "security": [
-                    {
-                        "Bearer": [ ]
-                    }
-                ]
-            }
-        },
-        "/profile/delete-address-by-user": {
-            "post": {
-                "tags": [
-                    "Profile"
-                ],
-                "summary": "Notifications",
-                "description": "Send Notification Lendtick",
-                "operationId": "Address",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "",
-                        "required": true,
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "id_user_address": {
-                                    "type": "integer",
-                                    "example": 8
-                                }
-                            },
-                            "required": [
-                                "id_user_address"
-                            ],
-                            "$schema": "http://json-schema.org/draft-04/schema#"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": ""
-                    }
-                },
-                "security": [
-                    {
-                        "Bearer": [ ]
-                    }
-                ]
-            }
-        },
         "/profile/get-address-by-user": {
             "get": {
                 "tags": [
@@ -378,12 +153,7 @@
                     "200": {
                         "description": "successful"
                     }
-                },
-                 "security": [
-                    {
-                        "Bearer": []
-                    }
-                ]
+                }
             }
         },
         "/company/get": {
@@ -478,6 +248,32 @@
                 "summary": "Get Total User Pending By Koperasi Admin",
                 "description": "Get Total User Pending By Koperasi Admin",
                 "operationId": "TotalUserPendingByKoperasiAdmin",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/mst/grade": {
+            "get": {
+                "tags": [
+                    "Master"
+                ],
+                "summary": "List Grade Master",
+                "description": "list grade",
+                "operationId": "gradelist",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
                 "produces": [
                     "application/json"
                 ],

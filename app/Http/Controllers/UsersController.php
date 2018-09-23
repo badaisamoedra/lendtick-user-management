@@ -249,7 +249,7 @@ class UsersController extends Controller
         $grade = $r->input('grade');
         $in = $r->input('date_in');
         $code = 200;
-        $data = RegisterFlow::where('id_register_member_flow','=',$id)->get()->first();
+        $data = RegisterFlow::where('id_user','=',$id)->get()->first();
         $data->approve_at = date("Y-m-d H:i:s");
         if($data->save()){
             // change level
