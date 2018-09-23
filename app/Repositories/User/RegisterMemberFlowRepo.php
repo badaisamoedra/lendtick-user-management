@@ -150,10 +150,15 @@ class RegisterMemberFlowRepo{
 					$order .= "ORDER BY ".implode(", ",$tmp);
 			}
 
+			// validation where was approve
+			$where[] = "a.approve_at IS NULL";
+
 			$data = DB::select(DB::raw("
-				SELECT a.*, b.* 
+				SELECT a.*, b.*, c.name, c.phone_number, c.npwp, c.email, c.loan_plafond, c.microloan_plafond, d.id_workflow_status
 				FROM [user].[register_member_flow] a 
 				JOIN [user].[master_register_member_flow] b ON a.id_master_register_member_flow=b.id_master_register_member_flow
+				JOIN [user].[user_profile] c ON a.id_user=c.id_user
+				JOIN [user].[user] d ON a.id_user=d.id_user
 				WHERE b.id_role_master='".$request->input('id_role_master')."' ".(count($where)?"AND (".implode(' AND ', $where).")":"")." ".$order
 			));
 
