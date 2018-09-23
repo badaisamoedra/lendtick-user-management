@@ -269,7 +269,7 @@ class UsersController extends Controller
                 $profile = Profile::where('id_user', $user->id_user)->get()->first();
                 $comp = Company::where('id_user_profile', $profile->id_user_profile)->get()->first();
                 if($grade && $in){
-                    $comp->grade = $grade;
+                    $comp->id_grade = $grade;
                     $comp->employee_starting_date = $in;
                 }
                 $comp->save();
