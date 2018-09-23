@@ -433,14 +433,14 @@
                         "name": "grade",
                         "in": "formData",
                         "description": "Grade",
-                        "required": true,
+                        "required": false,
                         "type": "string"
                     },
                     {
                         "name": "date_in",
                         "in": "formData",
                         "description": "Date IN",
-                        "required": true,
+                        "required": false,
                         "type": "string"
                     }
                 ],

@@ -12,6 +12,7 @@ use App\Models\Master\RoleMaster AS Role;
 use App\Models\Master\WorkflowMaster AS Workflow;
 use App\Models\Master\RegisterMemberFlowMaster AS MstRegisterFlow;
 use App\Repositories\User\RegisterMemberFlowRepo AS RegisterFlowRepo;
+use App\Repositories\User\ProfileRepo as ProfileRepo;
 use Illuminate\Hashing\BcryptHasher AS Hash;
 use App\Helpers\Api;
 use App\Helpers\Template;
@@ -224,14 +225,14 @@ class UsersController extends Controller
     *         description="Grade",
     *         in="formData",
     *         name="grade",
-    *         required=true,
+    *         required=false,
     *         type="string"
     *     ),
     *     @SWG\Parameter(
     *         description="Date IN",
     *         in="formData",
     *         name="date_in",
-    *         required=true,
+    *         required=false,
     *         type="string"
     *     ),
     *     @SWG\Response(
@@ -249,11 +250,10 @@ class UsersController extends Controller
         $grade = $r->input('grade');
         $in = $r->input('date_in');
         $code = 200;
-        $data = RegisterFlow::where('id_user','=',$id)->get()->first();
+        $mst_flow = MstRegisterFlow::where('id_role_master', $r->id_role_master)->get()->first();
+        $data = RegisterFlow::where('id_user','=',$id)->where('id_master_register_member_flow', '=', $mst_flow->id_master_register_member_flow)->get()->first();
         $data->approve_at = date("Y-m-d H:i:s");
         if($data->save()){
-            // change level
-            $mst_flow = MstRegisterFlow::where('id_master_register_member_flow', $data->id_master_register_member_flow)->get()->first();
             // last level
             $last_level = ($data->level == MstRegisterFlow::orderBy('level','desc')->first()->level);
             // change user to lendtick number
@@ -261,7 +261,7 @@ class UsersController extends Controller
             $user->id_workflow_status = $mst_flow->set_workflow_status_code;
             // change user
             if($last_level)
-                $user->username = 'koperasi'; // autogenerate by code
+                $user->username = ProfileRepo::getnik(); // autogenerate by code
             $user->save();
 
             // change grade
@@ -289,6 +289,26 @@ class UsersController extends Controller
                     "body" => $email
                     ]
                 );
+            } else {
+                // get next level
+                $data_next = RegisterFlow::where('id_user','=',$id)->where('level', '=', ((int)$data->level+1))->get();
+                if($data_next->count() > 0){
+                    $data_next = $data_next->first();
+                    $next_profile = $profile = Profile::where('id_user', $data_next->approve_by)->get()->first();
+
+                    $email = [
+                        "to"=> "'.$next_profile->email.'",
+                        "cc"=> "",
+                        "subject"=> "Register",
+                        "body"=> 'Ada permintaan approval untuk orang bernama : '.$profile->name,
+                        "type"=> "email",
+                        "attachment"=> ""
+                    ];
+                    RestCurl::post(env('LINK_NOTIF','https://lentick-api-notification-dev.azurewebsites.net')."/send", [ 
+                        "body" => $email
+                        ]
+                    );
+                }
             }
         } else {
             $code = 400;
