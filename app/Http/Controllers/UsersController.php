@@ -187,10 +187,7 @@ class UsersController extends Controller
                             "type"=> "email",
                             "attachment"=> ""
                         ];
-                        RestCurl::post(env('LINK_NOTIF','https://lentick-api-notification-dev.azurewebsites.net')."/send", [ 
-                            "body" => $email
-                            ]
-                        );
+                        RestCurl::post(env('LINK_NOTIF','https://lentick-api-notification-dev.azurewebsites.net')."/send", $email);
 
                     }
 
@@ -285,10 +282,7 @@ class UsersController extends Controller
                     "type"=> "email",
                     "attachment"=> ""
                 ];
-                RestCurl::post(env('LINK_NOTIF','https://lentick-api-notification-dev.azurewebsites.net')."/send", [ 
-                    "body" => $email
-                    ]
-                );
+                RestCurl::post(env('LINK_NOTIF','https://lentick-api-notification-dev.azurewebsites.net')."/send", $email);
             } else {
                 // get next level
                 $data_next = RegisterFlow::where('id_user','=',$id)->where('level', '=', ((int)$data->level+1))->get();
@@ -304,10 +298,7 @@ class UsersController extends Controller
                         "type"=> "email",
                         "attachment"=> ""
                     ];
-                    RestCurl::post(env('LINK_NOTIF','https://lentick-api-notification-dev.azurewebsites.net')."/send", [ 
-                        "body" => $email
-                        ]
-                    );
+                    RestCurl::post(env('LINK_NOTIF','https://lentick-api-notification-dev.azurewebsites.net')."/send", $email);
                 }
             }
         } else {

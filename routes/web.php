@@ -63,6 +63,8 @@ $router->group(['middleware'=>['authorize']], function() use($router){
 
         // profile 
         $router->get('get', 'ProfileController@GetUserProfile');
+        $router->put('update', 'ProfileController@update');
+
         // generate nik
         $router->get('generate-nik', 'ProfileController@GenerateNIK');
 
