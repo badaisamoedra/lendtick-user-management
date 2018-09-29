@@ -93,6 +93,18 @@ return [
             'prefix'   => env('DB_PREFIX', ''),
         ],
 
+        'mongodb' => [
+            'driver'   => 'mongodb',
+            'host'     => env('MONGO_DB_HOST','137.116.150.95'),
+            'port'     => env('MONGO_DB_PORT',27017),
+            'database' => env('MONGO_DB_DATABASE'),
+            'username' => env('MONGO_DB_USERNAME'),
+            'password' => env('MONGO_DB_PASSWORD'),
+            'options'  => [
+                'db' => 'master' 
+            ]
+        ],
+
     ],
 
     /*
