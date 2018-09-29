@@ -83,6 +83,13 @@ $router->group(['middleware'=>['authorize']], function() use($router){
     });
 });
 
+
+// location 
+$router->get('/all-province', 'LocationsController@GetAllProvince');
+$router->get('/get-city-by-province', 'LocationsController@GetCityByProvince');
+$router->get('/get-kec-by-province-city', 'LocationsController@GetKecamatanByCityAndProvince');
+$router->get('/get-kel-by-province-city-kec', 'LocationsController@GetKelurahanByCityAndProvinceAndKecamatan');
+
 ## enhance from lutfi 
 
 

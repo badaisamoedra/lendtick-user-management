@@ -289,6 +289,146 @@
                 ]
             }
         },
+        "/all-province": {
+            "get": {
+                "tags": [
+                    "Locations"
+                ],
+                "summary": "Get All Propinsi",
+                "description": "Get All Propinsi",
+                "operationId": "Address",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/get-city-by-province": {
+            "get": {
+                "tags": [
+                    "Locations"
+                ],
+                "summary": "Get City By Propinsi",
+                "description": "Get City By Propinsi",
+                "operationId": "Address",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "propinsi_kode",
+                        "in": "query",
+                        "description": "Kode Provinsi ",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/get-kec-by-province-city": {
+            "get": {
+                "tags": [
+                    "Locations"
+                ],
+                "summary": "Get Kecamatan By City and Provinsi",
+                "description": "Get Kecamatan By City and Provinsi",
+                "operationId": "Address",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "propinsi_kode",
+                        "in": "query",
+                        "description": "Kode Provinsi ",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "kabkota_kode",
+                        "in": "query",
+                        "description": "Kode Kabkota ",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/get-kel-by-province-city-kec": {
+            "get": {
+                "tags": [
+                    "Locations"
+                ],
+                "summary": "Get Kelurahan By City and Provinsi and Kecamatan",
+                "description": "Get Kelurahan By City and Provinsi and Kecamatan",
+                "operationId": "Address",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "propinsi_kode",
+                        "in": "query",
+                        "description": "Kode Provinsi ",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "kabkota_kode",
+                        "in": "query",
+                        "description": "Kode Kabkota ",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "kec_kode",
+                        "in": "query",
+                        "description": "Kode Kecamatan ",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
         "/profile/get": {
             "get": {
                 "tags": [
@@ -322,6 +462,55 @@
                 "operationId": "generate-nik",
                 "produces": [
                     "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/profile/update": {
+            "put": {
+                "tags": [
+                    "Flow Approval"
+                ],
+                "summary": "Approve User",
+                "description": "Update profile",
+                "operationId": "profileUpdate",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "formData",
+                        "description": "ID user",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "grade",
+                        "in": "formData",
+                        "description": "Grade",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "date_in",
+                        "in": "formData",
+                        "description": "Date IN",
+                        "required": false,
+                        "type": "string"
+                    }
                 ],
                 "responses": {
                     "200": {
