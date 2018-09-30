@@ -29,4 +29,8 @@ class ProfileRepo {
 		}
 	}
 
+	public function GenerateNik(){
+		return array('nomor_NIK' => sprintf("%08s", (($res = $this->getnik())?(!is_null($res->NIK)?(int)$res->NIK:0):0)+1));
+	}
+
 }

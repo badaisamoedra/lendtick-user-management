@@ -11,6 +11,7 @@ use App\Models\User\RegisterMemberFlowManagement AS RegisterFlow;
 use App\Models\Master\RoleMaster AS Role;
 use App\Models\Master\WorkflowMaster AS Workflow;
 use App\Models\Master\RegisterMemberFlowMaster AS MstRegisterFlow;
+use App\Models\Master\GradeMaster AS MstGrade;
 use App\Repositories\User\RegisterMemberFlowRepo AS RegisterFlowRepo;
 use App\Repositories\User\ProfileRepo as ProfileRepo;
 use Illuminate\Hashing\BcryptHasher AS Hash;
@@ -272,7 +273,7 @@ class UsersController extends Controller
     *     }
     * )
     * */
-    public function approve(Request $r){
+    public function approve(Request $r, ProfileRepo $Pr){
         $id = $r->input('id');
         $grade = $r->input('grade');
         $in = $r->input('date_in');
@@ -286,23 +287,35 @@ class UsersController extends Controller
             // change user to lendtick number
             $user = User::where('id_user',$data->id_user)->get()->first();
             $user->id_workflow_status = $mst_flow->set_workflow_status_code;
+
             // change user
             if($last_level)
-                $user->username = ProfileRepo::getnik(); // autogenerate by code
+                $user->username = $Pr->GenerateNik()["nomor_NIK"]; // autogenerate by code
             $user->save();
+
+            $profile = Profile::where('id_user', $user->id_user)->get()->first();
 
             // change grade
             if(!empty($grade) && !empty($in) && !is_null($grade) && !is_null($in)){
-                $profile = Profile::where('id_user', $user->id_user)->get()->first();
                 $comp = Company::where('id_user_profile', $profile->id_user_profile)->get()->first();
                 if($grade && $in){
                     $comp->id_grade = $grade;
                     $comp->employee_starting_date = $in;
                 }
                 $comp->save();
+
+                // change data loan plafond
+                $profile->loan_plafond = 1000;
+                $profile->microloan_plafond = MstGrade::where('id_grade',$grade)->get()->first()->microloan_amount;
+                $profile->save();
             }
+
             // check level for last approval
             if($last_level){
+                // update id_koperasi
+                $profile->id_koperasi = $user->username;
+                $profile->save();
+
                 // send email
                 $email = [
                     "to"=> $profile->email,
