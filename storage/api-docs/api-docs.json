@@ -642,7 +642,7 @@
                         "description": "Date IN",
                         "required": false,
                         "type": "string",
-                        "default": "2018-12-31 23:59:59"
+                        "default": "2018-12-31"
                     }
                 ],
                 "responses": {
