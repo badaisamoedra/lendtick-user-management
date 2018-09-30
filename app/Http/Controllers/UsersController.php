@@ -117,14 +117,15 @@ class UsersController extends Controller
         $pass = $h->make('kop2018');
 
         $data = $r->only(['name','company','identity_photo','company_identity_photo','phone_number','email','personal_photo','role']);
-        if(count($data) == 7){
+        if(count($data) >= 7){
             try{
                 // validate role insert
                 $tmp = Role::where('status', 1);
+
                 if(isset($data['role']))
                     $tmp->where('id_role_master', $data['role']);
                 else
-                    $tmp->where('is_frontend', 1);
+                    $tmp->where('is_front_end', 1);
                 // get role data
                 $tmp->get();
                 // get role id
@@ -261,7 +262,7 @@ class UsersController extends Controller
     *         name="date_in",
     *         required=false,
     *         type="string",
-    *         default="2018-12-31 23:59:59"
+    *         default="2018-12-31"
     *     ),
     *     @SWG\Response(
     *         response="200",
@@ -300,7 +301,7 @@ class UsersController extends Controller
                 $comp = Company::where('id_user_profile', $profile->id_user_profile)->get()->first();
                 if($grade && $in){
                     $comp->id_grade = $grade;
-                    $comp->employee_starting_date = $in;
+                    $comp->employee_starting_date = date("Y-m-d",strtotime($in));
                 }
                 $comp->save();
 
