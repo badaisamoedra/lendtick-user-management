@@ -26,9 +26,8 @@ class LocationsController extends Controller
     * @SWG\Get(
     *     path="/all-province",
     *     description="Get All Propinsi",
-    *     operationId="Address",
-    *     produces={"application/json"},
-    *     security={{"Bearer":{}}},
+    *     operationId="GetAllProvince",
+    *     produces={"application/json"}, 
     *     @SWG\Response(
     *         response="200",
     *         description="successful"
@@ -56,9 +55,8 @@ class LocationsController extends Controller
     * @SWG\Get(
     *     path="/get-city-by-province",
     *     description="Get City By Propinsi",
-    *     operationId="Address",
-    *     produces={"application/json"},
-    *     security={{"Bearer":{}}},
+    *     operationId="GetCityByProvince",
+    *     produces={"application/json"}, 
     *     @SWG\Parameter(
     *         description="Kode Provinsi ",
     *         in="query",
@@ -100,9 +98,8 @@ class LocationsController extends Controller
     * @SWG\Get(
     *     path="/get-kec-by-province-city",
     *     description="Get Kecamatan By City and Provinsi",
-    *     operationId="Address",
+    *     operationId="GetKecamatanByCityAndProvince",
     *     produces={"application/json"},
-    *     security={{"Bearer":{}}},
     *     @SWG\Parameter(
     *         description="Kode Provinsi ",
     *         in="query",
@@ -153,9 +150,8 @@ class LocationsController extends Controller
     * @SWG\Get(
     *     path="/get-kel-by-province-city-kec",
     *     description="Get Kelurahan By City and Provinsi and Kecamatan",
-    *     operationId="Address",
-    *     produces={"application/json"},
-    *     security={{"Bearer":{}}},
+    *     operationId="GetKelurahanByCityAndProvinceAndKecamatan",
+    *     produces={"application/json"}, 
     *     @SWG\Parameter(
     *         description="Kode Provinsi ",
     *         in="query",

@@ -296,7 +296,7 @@
                 ],
                 "summary": "Get All Propinsi",
                 "description": "Get All Propinsi",
-                "operationId": "Address",
+                "operationId": "GetAllProvince",
                 "produces": [
                     "application/json"
                 ],
@@ -304,12 +304,7 @@
                     "200": {
                         "description": "successful"
                     }
-                },
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ]
+                }
             }
         },
         "/get-city-by-province": {
@@ -319,7 +314,7 @@
                 ],
                 "summary": "Get City By Propinsi",
                 "description": "Get City By Propinsi",
-                "operationId": "Address",
+                "operationId": "GetCityByProvince",
                 "produces": [
                     "application/json"
                 ],
@@ -336,12 +331,7 @@
                     "200": {
                         "description": "successful"
                     }
-                },
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ]
+                }
             }
         },
         "/get-kec-by-province-city": {
@@ -351,7 +341,7 @@
                 ],
                 "summary": "Get Kecamatan By City and Provinsi",
                 "description": "Get Kecamatan By City and Provinsi",
-                "operationId": "Address",
+                "operationId": "GetKecamatanByCityAndProvince",
                 "produces": [
                     "application/json"
                 ],
@@ -375,12 +365,7 @@
                     "200": {
                         "description": "successful"
                     }
-                },
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ]
+                }
             }
         },
         "/get-kel-by-province-city-kec": {
@@ -390,7 +375,7 @@
                 ],
                 "summary": "Get Kelurahan By City and Provinsi and Kecamatan",
                 "description": "Get Kelurahan By City and Provinsi and Kecamatan",
-                "operationId": "Address",
+                "operationId": "GetKelurahanByCityAndProvinceAndKecamatan",
                 "produces": [
                     "application/json"
                 ],
@@ -421,12 +406,7 @@
                     "200": {
                         "description": "successful"
                     }
-                },
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ]
+                }
             }
         },
         "/profile/get": {
