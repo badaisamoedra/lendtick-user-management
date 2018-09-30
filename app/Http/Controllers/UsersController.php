@@ -27,7 +27,11 @@ class UsersController extends Controller
      * @return void
      */
     public function __construct(){
-        $this->role = Role::orderBy('id_role_master','ASC')->first()->id_role_master;
+        // contruct mode
+    }
+
+    public function __destruct(){
+        // destruct mode
     }
 
 
@@ -40,30 +44,25 @@ class UsersController extends Controller
     *     consumes={"application/x-www-form-urlencoded"},
     *     produces={"application/json"},
     *     @SWG\Parameter(
-    *         description="Name",
-    *         in="formData",
-    *         name="name",
-    *         required=true,
-    *         type="string"
-    *     ),
-    *     @SWG\Parameter(
     *         description="Company code from list",
     *         in="formData",
     *         name="company",
     *         required=true,
-    *         type="string"
+    *         type="string",
+    *         default="COMP001"
     *     ),
     *     @SWG\Parameter(
-    *         description="Base64 jpg of identity",
+    *         description="Role id",
     *         in="formData",
-    *         name="identity_photo",
-    *         required=true,
-    *         type="string"
+    *         name="role",
+    *         required=false,
+    *         type="string",
+    *         default="ROLE001"
     *     ),
     *     @SWG\Parameter(
-    *         description="Base64 jpg of company identity",
+    *         description="Name",
     *         in="formData",
-    *         name="company_identity_photo",
+    *         name="name",
     *         required=true,
     *         type="string"
     *     ),
@@ -78,6 +77,20 @@ class UsersController extends Controller
     *         description="Email new user",
     *         in="formData",
     *         name="email",
+    *         required=true,
+    *         type="string"
+    *     ),
+    *     @SWG\Parameter(
+    *         description="Base64 jpg of identity",
+    *         in="formData",
+    *         name="identity_photo",
+    *         required=true,
+    *         type="string"
+    *     ),
+    *     @SWG\Parameter(
+    *         description="Base64 jpg of company identity",
+    *         in="formData",
+    *         name="company_identity_photo",
     *         required=true,
     *         type="string"
     *     ),
@@ -102,11 +115,24 @@ class UsersController extends Controller
         // default password
         $pass = $h->make('kop2018');
 
-        $data = $r->only(['name','company','identity_photo','company_identity_photo','phone_number','email','personal_photo']);
+        $data = $r->only(['name','company','identity_photo','company_identity_photo','phone_number','email','personal_photo','role']);
         if(count($data) == 7){
             try{
+                // validate role insert
+                $tmp = Role::where('status', 1);
+                if(isset($data['role']))
+                    $tmp->where('id_role_master', $data['role']);
+                else
+                    $tmp->where('is_frontend', 1);
+                // get role data
+                $tmp->get();
+                // get role id
+                $role = ($tmp->count() > 0)?$tmp->first()->id_role_master:"ROLE001";
+                // flush variable tmp
+                unset($tmp);
+
                 // Data user
-                $user = User::firstOrNew(['username' => $data['email']],['id_role_master' => $this->role, 'id_workflow_status' => 'MBRSTS00', 'is_new_user' => 1, 'password' => $pass, 'created_by' => 1]);
+                $user = User::firstOrNew(['username' => $data['email']],['id_role_master' => $role, 'id_workflow_status' => 'MBRSTS00', 'is_new_user' => 1, 'password' => $pass, 'created_by' => 1]);
                 if(is_null($user->id_user)){
                     if($res = $user->save()){
                         $id = $user->id_user;
@@ -167,11 +193,13 @@ class UsersController extends Controller
                                 }
                             }
 
-                            // Data working approval overflow
-                            if(isset($id)){
-                                $cnt = RegisterFlow::where('id_user','=',$id)->get()->count();
-                                if($cnt == 0){
-                                    RegisterFlowRepo::flow($id);
+                            if($role == "ROLE001"){
+                                // Data working approval overflow
+                                if(isset($id)){
+                                    $cnt = RegisterFlow::where('id_user','=',$id)->get()->count();
+                                    if($cnt == 0){
+                                        RegisterFlowRepo::flow($id);
+                                    }
                                 }
                             }
                         // } catch(Exception $e){
@@ -180,14 +208,14 @@ class UsersController extends Controller
 
                         // send to notification
                         $email = [
-                            "to"=> "'.$user->username.'",
+                            "to"=> $user->username,
                             "cc"=> "",
                             "subject"=> "Register",
                             "body"=> Template::email('register'),
                             "type"=> "email",
                             "attachment"=> ""
                         ];
-                        RestCurl::post(env('LINK_NOTIF','https://lentick-api-notification-dev.azurewebsites.net')."/send", $email);
+                        $res_email = RestCurl::post(env('LINK_NOTIF','https://lentick-api-notification-dev.azurewebsites.net')."/send", $email);
 
                     }
 
@@ -223,14 +251,16 @@ class UsersController extends Controller
     *         in="formData",
     *         name="grade",
     *         required=false,
-    *         type="string"
+    *         type="string",
+    *         default="GRD001"
     *     ),
     *     @SWG\Parameter(
     *         description="Date IN",
     *         in="formData",
     *         name="date_in",
     *         required=false,
-    *         type="string"
+    *         type="string",
+    *         default="2018-12-31 23:59:59"
     *     ),
     *     @SWG\Response(
     *         response="200",
@@ -275,7 +305,7 @@ class UsersController extends Controller
             if($last_level){
                 // send email
                 $email = [
-                    "to"=> "'.$profile->email.'",
+                    "to"=> $profile->email,
                     "cc"=> "",
                     "subject"=> "Register",
                     "body"=> 'username : '.$user->username."\n\nPassword : kop2018",
@@ -291,7 +321,7 @@ class UsersController extends Controller
                     $next_profile = $profile = Profile::where('id_user', $data_next->approve_by)->get()->first();
 
                     $email = [
-                        "to"=> "'.$next_profile->email.'",
+                        "to"=> $next_profile->email,
                         "cc"=> "",
                         "subject"=> "Register",
                         "body"=> 'Ada permintaan approval untuk orang bernama : '.$profile->name,
@@ -321,14 +351,16 @@ class UsersController extends Controller
     *         in="query",
     *         name="start",
     *         required=true,
-    *         type="string"
+    *         type="string",
+    *         default="0"
     *     ),
     *     @SWG\Parameter(
     *         description="Length of get row",
     *         in="query",
     *         name="length",
     *         required=true,
-    *         type="string"
+    *         type="string",
+    *         default="10"
     *     ),
     *     @SWG\Parameter(
     *         description="Sort by",
@@ -336,6 +368,14 @@ class UsersController extends Controller
     *         name="sort",
     *         required=true,
     *         type="string",
+    *         default="[""name"",""asc""]"
+    *     ),
+    *     @SWG\Parameter(
+    *         description="Filter column",
+    *         in="query",
+    *         name="filter",
+    *         required=false,
+    *         type="string"
     *     ),
     *     @SWG\Response(
     *         response="200",
@@ -351,7 +391,7 @@ class UsersController extends Controller
         $start = $r->input('start');
         $length = $r->input('length');
         $sort = (array) json_decode($r->input('sort'));
-        $where = [];
+        $where = $r->input('filter');
         return response()->json(Api::response(true,Template::lang('success'),RegisterFlowRepo::approve_list($r, $where, $start, $length, $sort)),200);
     }
 }

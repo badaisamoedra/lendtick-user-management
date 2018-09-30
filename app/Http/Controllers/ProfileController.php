@@ -99,16 +99,37 @@ class ProfileController extends Controller
     *         type="string"
     *     ),
     *     @SWG\Parameter(
-    *         description="Grade",
+    *         description="Name",
     *         in="formData",
-    *         name="grade",
+    *         name="name",
     *         required=false,
     *         type="string"
     *     ),
     *     @SWG\Parameter(
-    *         description="Date IN",
+    *         description="Email",
     *         in="formData",
-    *         name="date_in",
+    *         name="email",
+    *         required=false,
+    *         type="string"
+    *     ),
+    *     @SWG\Parameter(
+    *         description="Phone Number",
+    *         in="formData",
+    *         name="phone_number",
+    *         required=false,
+    *         type="string"
+    *     ),
+    *     @SWG\Parameter(
+    *         description="Identity Photo",
+    *         in="formData",
+    *         name="identity_photo",
+    *         required=false,
+    *         type="string"
+    *     ),
+    *     @SWG\Parameter(
+    *         description="Personal Photo",
+    *         in="formData",
+    *         name="personal_photo",
     *         required=false,
     *         type="string"
     *     ),
@@ -116,9 +137,9 @@ class ProfileController extends Controller
     *         response="200",
     *         description="successful"
     *     ),
-    *     summary="Approve User",
+    *     summary="Update User Profile",
     *     tags={
-    *         "Flow Approval"
+    *         "Profile"
     *     }
     * )
     * */

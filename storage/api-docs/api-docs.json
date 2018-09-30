@@ -13,231 +13,6 @@
         "https"
     ],
     "paths": {
-               "/profile/update-address-by-user": {
-            "put": {
-                "tags": [
-                    "Profile"
-                ],
-                "summary": "Update-address-by-user",
-                "description": "Update-address-by-user",
-                "operationId": "Update-address-by-user-id",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "",
-                        "required": true,
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "id_user_address": {
-                                    "type": "integer",
-                                    "example": 4
-                                },
-                                "address_name": {
-                                    "type": "string",
-                                    "example": "bojong banget 2"
-                                },
-                                "receiver_name": {
-                                    "type": "string",
-                                    "example": "receiver_name"
-                                },
-                                "address_text": {
-                                    "type": "string",
-                                    "example": "oke banget"
-                                },
-                                "city_or_district": {
-                                    "type": "integer",
-                                    "example": 1000
-                                },
-                                "postal_code": {
-                                    "type": "string",
-                                    "example": "postal_code"
-                                },
-                                "receiver_phone": {
-                                    "type": "string",
-                                    "example": "receiver_phone"
-                                },
-                                "address_longitude": {
-                                    "type": "string",
-                                    "example": "address_longitude"
-                                },
-                                "address_latlong_text": {
-                                    "type": "string",
-                                    "example": "address_latlong_text"
-                                },
-                                "address_latitude": {
-                                    "type": "string",
-                                    "example": "address_latitude"
-                                }
-                            },
-                            "required": [
-                                "id_user_address",
-                                "receiver_name",
-                                "address_text",
-                                "city_or_district",
-                                "postal_code",
-                                "receiver_phone",
-                                "address_longitude",
-                                "address_latlong_text",
-                                "address_latitude"
-                            ],
-                            "$schema": "http://json-schema.org/draft-04/schema#"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": ""
-                    }
-                },
-                "security": [
-                    {
-                        "Bearer": [ ]
-                    }
-                ]
-            }
-        },
-        "/profile/create-address-by-user": {
-            "post": {
-                "tags": [
-                    "Profile"
-                ],
-                "summary": "create-address-by-user",
-                "description": "create-address-by-user",
-                "operationId": "create-address-by-user-id",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "",
-                        "required": true,
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "address_name": {
-                                    "type": "string",
-                                    "example": "bojong banget 2"
-                                },
-                                "receiver_name": {
-                                    "type": "string",
-                                    "example": "receiver_name"
-                                },
-                                "address_text": {
-                                    "type": "string",
-                                    "example": "oke banget"
-                                },
-                                "city_or_district": {
-                                    "type": "integer",
-                                    "example": 1000
-                                },
-                                "postal_code": {
-                                    "type": "string",
-                                    "example": "postal_code"
-                                },
-                                "receiver_phone": {
-                                    "type": "string",
-                                    "example": "receiver_phone"
-                                },
-                                "address_longitude": {
-                                    "type": "string",
-                                    "example": "address_longitude"
-                                },
-                                "address_latlong_text": {
-                                    "type": "string",
-                                    "example": "address_latlong_text"
-                                },
-                                "address_latitude": {
-                                    "type": "string",
-                                    "example": "address_latitude"
-                                }
-                            },
-                            "required": [
-                                "address_name",
-                                "receiver_name",
-                                "address_text",
-                                "city_or_district",
-                                "postal_code",
-                                "receiver_phone",
-                                "address_longitude",
-                                "address_latlong_text",
-                                "address_latitude"
-                            ],
-                            "$schema": "http://json-schema.org/draft-04/schema#"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": ""
-                    }
-                },
-                "security": [
-                    {
-                        "Bearer": [ ]
-                    }
-                ]
-            }
-        },
-        "/profile/delete-address-by-user": {
-            "post": {
-                "tags": [
-                    "Profile"
-                ],
-                "summary": "Notifications",
-                "description": "Send Notification Lendtick",
-                "operationId": "Address",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "",
-                        "required": true,
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "id_user_address": {
-                                    "type": "integer",
-                                    "example": 8
-                                }
-                            },
-                            "required": [
-                                "id_user_address"
-                            ],
-                            "$schema": "http://json-schema.org/draft-04/schema#"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": ""
-                    }
-                },
-                "security": [
-                    {
-                        "Bearer": [ ]
-                    }
-                ]
-            }
-        },
         "/profile/get-address-by-user": {
             "get": {
                 "tags": [
@@ -256,7 +31,7 @@
                 },
                 "security": [
                     {
-                        "Bearer": [ ]
+                        "Bearer": []
                     }
                 ]
             }
@@ -683,9 +458,9 @@
         "/profile/update": {
             "put": {
                 "tags": [
-                    "Flow Approval"
+                    "Profile"
                 ],
-                "summary": "Approve User",
+                "summary": "Update User Profile",
                 "description": "Update profile",
                 "operationId": "profileUpdate",
                 "consumes": [
@@ -703,16 +478,37 @@
                         "type": "string"
                     },
                     {
-                        "name": "grade",
+                        "name": "name",
                         "in": "formData",
-                        "description": "Grade",
+                        "description": "Name",
                         "required": false,
                         "type": "string"
                     },
                     {
-                        "name": "date_in",
+                        "name": "email",
                         "in": "formData",
-                        "description": "Date IN",
+                        "description": "Email",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "phone_number",
+                        "in": "formData",
+                        "description": "Phone Number",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "identity_photo",
+                        "in": "formData",
+                        "description": "Identity Photo",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "personal_photo",
+                        "in": "formData",
+                        "description": "Personal Photo",
                         "required": false,
                         "type": "string"
                     }
@@ -745,30 +541,25 @@
                 ],
                 "parameters": [
                     {
-                        "name": "name",
-                        "in": "formData",
-                        "description": "Name",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
                         "name": "company",
                         "in": "formData",
                         "description": "Company code from list",
                         "required": true,
-                        "type": "string"
+                        "type": "string",
+                        "default": "COMP001"
                     },
                     {
-                        "name": "identity_photo",
+                        "name": "role",
                         "in": "formData",
-                        "description": "Base64 jpg of identity",
-                        "required": true,
-                        "type": "string"
+                        "description": "Role id",
+                        "required": false,
+                        "type": "string",
+                        "default": "ROLE001"
                     },
                     {
-                        "name": "company_identity_photo",
+                        "name": "name",
                         "in": "formData",
-                        "description": "Base64 jpg of company identity",
+                        "description": "Name",
                         "required": true,
                         "type": "string"
                     },
@@ -783,6 +574,20 @@
                         "name": "email",
                         "in": "formData",
                         "description": "Email new user",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "identity_photo",
+                        "in": "formData",
+                        "description": "Base64 jpg of identity",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "company_identity_photo",
+                        "in": "formData",
+                        "description": "Base64 jpg of company identity",
                         "required": true,
                         "type": "string"
                     },
@@ -828,14 +633,16 @@
                         "in": "formData",
                         "description": "Grade",
                         "required": false,
-                        "type": "string"
+                        "type": "string",
+                        "default": "GRD001"
                     },
                     {
                         "name": "date_in",
                         "in": "formData",
                         "description": "Date IN",
                         "required": false,
-                        "type": "string"
+                        "type": "string",
+                        "default": "2018-12-31 23:59:59"
                     }
                 ],
                 "responses": {
@@ -870,20 +677,30 @@
                         "in": "query",
                         "description": "Start row",
                         "required": true,
-                        "type": "string"
+                        "type": "string",
+                        "default": "0"
                     },
                     {
                         "name": "length",
                         "in": "query",
                         "description": "Length of get row",
                         "required": true,
-                        "type": "string"
+                        "type": "string",
+                        "default": "10"
                     },
                     {
                         "name": "sort",
                         "in": "query",
                         "description": "Sort by",
                         "required": true,
+                        "type": "string",
+                        "default": "[\"name\",\"asc\"]"
+                    },
+                    {
+                        "name": "filter",
+                        "in": "query",
+                        "description": "Filter column",
+                        "required": false,
                         "type": "string"
                     }
                 ],
