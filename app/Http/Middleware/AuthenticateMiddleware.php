@@ -25,7 +25,6 @@ class AuthenticateMiddleware
             $r = (object) RestCurl::exec('GET',env('AUTH_URI',null),[],$token);
 
             if($r->status !== 200){
-                dd($r->data);
                 return response()->json(Api::response($r->data->status, $r->data->message,$r->data->data),$r->data->status);
                 // $head = explode("\r\n",$r->header);
                 // throw New Exception(substr($head[0],13),$r->status);
