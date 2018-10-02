@@ -38,6 +38,7 @@ $router->group(['middleware'=>['authorize']], function() use($router){
     $router->group(['prefix'=>'mst'], function() use($router){
         // get list grade
         $router->get('grade', 'GradeController@list');
+        $router->get('role', 'RoleController@list');
     });
 
     $router->post('/pu', function(Illuminate\Http\Request $request, App\Helpers\BlobStorage $blob) use($router){
