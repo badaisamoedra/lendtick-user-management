@@ -82,7 +82,7 @@ Class BlobStorage {
           $name = sha1(self::$data['source']).".".self::$config['ext_type'];
           $path = self::_validatePath(self::$data['path']).$name;
 
-          self::$client->createBlockBlob(self::$config['Container'], $path, $tmp_content,$options);
+          // self::$client->createBlockBlob(self::$config['Container'], $path, $tmp_content,$options);
           $link = self::$config['Endpoint']."://".self::$config['AccountName'].".blob.core.windows.net/".self::$config['Container']."/".$path;
         }
       }
