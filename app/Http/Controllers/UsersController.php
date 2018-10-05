@@ -113,6 +113,7 @@ class UsersController extends Controller
     * )
     * */
     public function register(Request $r, Hash $h){
+        dd($r->input());
         // default password
         $pass = $h->make('kop2018');
 
