@@ -33,6 +33,8 @@ $router->group(['middleware'=>['authorize']], function() use($router){
     $router->group(['prefix'=>'user'], function() use($router){
         // approval by HR & Koperasi
         $router->put('approve', 'UsersController@approve');
+        // reject by HR & Koperasi
+        $router->put('reject', 'UsersController@reject');
     });
 
     $router->group(['prefix'=>'mst'], function() use($router){

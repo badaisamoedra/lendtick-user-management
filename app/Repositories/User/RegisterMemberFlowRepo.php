@@ -117,14 +117,15 @@ class RegisterMemberFlowRepo{
 		if(is_numeric($st) && is_numeric($l)){
 
 			$field = ["c.name", "c.phone_number", "c.npwp", "c.email", "c.loan_plafond", "c.microloan_plafond", "d.id_workflow_status"];
-			// where inidication
+			// where indication
 			$where = [];
 
 			$c_all = DB::select(DB::raw("
 				SELECT COUNT(a.id_register_member_flow) AS cnt 
 				FROM [user].[register_member_flow] a 
 				JOIN [user].[master_register_member_flow] b ON a.id_master_register_member_flow=b.id_master_register_member_flow
-				WHERE b.id_role_master='".$request->input('id_role_master')."' AND a.approve_at IS NULL "
+				JOIN [user].[user] d ON a.id_user=d.id_user
+				WHERE d.id_workflow_status='EMPSTS01' AND b.id_role_master='".$request->input('id_role_master')."' AND a.approve_at IS NULL "
 			))[0]->cnt;
 
 			if(!is_null($d) && !empty($d))
@@ -139,7 +140,7 @@ class RegisterMemberFlowRepo{
 				JOIN [user].[user_profile] c ON a.id_user=c.id_user
 				JOIN [user].[user_company] e ON c.id_user_profile=e.id_user_profile
 				JOIN [user].[user] d ON a.id_user=d.id_user
-				WHERE b.id_role_master='".$request->input('id_role_master')."' AND a.approve_at IS NULL ".(count($where)>0?"AND (".implode(' OR ', $where).")":"")
+				WHERE d.id_workflow_status='EMPSTS01' AND b.id_role_master='".$request->input('id_role_master')."' AND a.approve_at IS NULL ".(count($where)>0?"AND (".implode(' OR ', $where).")":"")
 			))[0]->cnt;
 
 			// order by
@@ -161,7 +162,7 @@ class RegisterMemberFlowRepo{
 				JOIN [user].[user_profile] c ON a.id_user=c.id_user
 				JOIN [user].[user_company] e ON c.id_user_profile=e.id_user_profile
 				JOIN [user].[user] d ON a.id_user=d.id_user
-				WHERE b.id_role_master='".$request->input('id_role_master')."' AND a.approve_at IS NULL ".(count($where)>0?"AND (".implode(' OR ', $where).")":"")." ".$order." ".$length[0]." ".$length[1]
+				WHERE d.id_workflow_status='EMPSTS01' AND b.id_role_master='".$request->input('id_role_master')."' AND a.approve_at IS NULL ".(count($where)>0?"AND (".implode(' OR ', $where).")":"")." ".$order." ".$length[0]." ".$length[1]
 			));
 
 			return ['count_all'=>$c_all,'count_filter'=>$c_fil,'data'=>$data];

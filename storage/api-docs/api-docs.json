@@ -639,7 +639,7 @@
                 ],
                 "summary": "Approve User",
                 "description": "Register Lendtick",
-                "operationId": "user",
+                "operationId": "aprroveUser",
                 "consumes": [
                     "application/x-www-form-urlencoded"
                 ],
@@ -674,6 +674,44 @@
                 "responses": {
                     "200": {
                         "description": "successful"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/user/reject": {
+            "put": {
+                "tags": [
+                    "Flow Approval"
+                ],
+                "summary": "Reject User",
+                "description": "Reject Request",
+                "operationId": "rejectUser",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "formData",
+                        "description": "ID user",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful"
+                    },
+                    "400": {
+                        "description": "failed"
                     }
                 },
                 "security": [

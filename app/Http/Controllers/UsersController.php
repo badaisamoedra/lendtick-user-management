@@ -134,7 +134,7 @@ class UsersController extends Controller
                 unset($tmp);
 
                 // Data user
-                $user = User::firstOrNew(['username' => $data['email']],['id_role_master' => $role, 'id_workflow_status' => 'MBRSTS00', 'is_new_user' => 1, 'password' => $pass, 'created_by' => 1]);
+                $user = User::firstOrNew(['username' => $data['email']],['id_role_master' => $role, 'id_workflow_status' => 'EMPSTS01', 'is_new_user' => 1, 'password' => $pass, 'created_by' => 1]);
                 if(is_null($user->id_user)){
                     if($res = $user->save()){
                         $id = $user->id_user;
@@ -237,7 +237,7 @@ class UsersController extends Controller
     *     path="/user/approve",
     *     consumes={"multipart/form-data"},
     *     description="Register Lendtick",
-    *     operationId="user",
+    *     operationId="aprroveUser",
     *     consumes={"application/x-www-form-urlencoded"},
     *     produces={"application/json"},
     *     security={{"Bearer":{}}},
@@ -287,18 +287,20 @@ class UsersController extends Controller
             $last_level = ($data->level == MstRegisterFlow::orderBy('level','desc')->first()->level);
             // change user to lendtick number
             $user = User::where('id_user',$data->id_user)->get()->first();
-            $user->id_workflow_status = $mst_flow->set_workflow_status_code;
+            // $user->id_workflow_status = $mst_flow->set_workflow_status_code;
 
             // change user
-            if($last_level)
+            if($last_level){
                 $user->username = $Pr->GenerateNik()["nomor_NIK"]; // autogenerate by code
-            $user->save();
+                $user->save();
+            }
 
             $profile = Profile::where('id_user', $user->id_user)->get()->first();
 
             // change grade
             if(!empty($grade) && !empty($in) && !is_null($grade) && !is_null($in)){
                 $comp = Company::where('id_user_profile', $profile->id_user_profile)->get()->first();
+                $comp->id_workflow_status = $mst_flow->set_workflow_status_code;
                 if($grade && $in){
                     $comp->id_grade = $grade;
                     $comp->employee_starting_date = date("Y-m-d",strtotime($in));
@@ -349,6 +351,60 @@ class UsersController extends Controller
             $code = 400;
         }
         return response()->json(Api::response(true,$code==400?Template::lang('failed'):Template::lang('success')),$code);
+    }
+
+    /**
+    * @SWG\Put(
+    *     path="/user/reject",
+    *     consumes={"multipart/form-data"},
+    *     description="Reject Request",
+    *     operationId="rejectUser",
+    *     consumes={"application/x-www-form-urlencoded"},
+    *     produces={"application/json"},
+    *     security={{"Bearer":{}}},
+    *     @SWG\Parameter(
+    *         description="ID user",
+    *         in="formData",
+    *         name="id",
+    *         required=true,
+    *         type="string"
+    *     ),
+    *     @SWG\Response(
+    *         response="200",
+    *         description="successful"
+    *     ),
+    *     @SWG\Response(
+    *         response="400",
+    *         description="failed"
+    *     ),
+    *     summary="Reject User",
+    *     tags={
+    *         "Flow Approval"
+    *     }
+    * )
+    * */
+    public function reject(Request $r){
+        $id = $r->input('id');
+        if($id){
+            $user = User::where('id_user','=',$id)->get()->first();
+            $user->id_workflow_status = 'EMPSTS00';
+            if($res = $user->save()){
+                $profile = Profile::where('id_user','=',$user->id_user)->get()->first();
+                $role = Role::where('id_role_master', $r->id_role_master)->get()->first();
+                $email = [
+                    "to"=> $profile->email,
+                    "cc"=> "",
+                    "subject"=> "Reject Request From ".$role->name_role_master,
+                    "body"=> 'Pengajuan anda di tolak oleh '.$role->name_role_master,
+                    "type"=> "email",
+                    "attachment"=> ""
+                ];
+                RestCurl::post(env('LINK_NOTIF','https://lentick-api-notification-dev.azurewebsites.net')."/send", $email);
+                return response()->json(Api::response(true,Template::lang('success')),200);
+            }
+            return response()->json(Api::response(false,Template::lang('failed')),400);
+        }
+        return response()->json(Api::response(false,Template::lang('failed')),400);
     }
     
     /**
