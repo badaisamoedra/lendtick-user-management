@@ -37,6 +37,8 @@ class AuthenticateMiddleware
         if(isset($r))
             $request->merge((array)$r->data->data);
 
-        return $next($request);
+        return $next($request)
+            ->header('Access-Control-Allow-Origin', '*')
+            ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
     }
 }
