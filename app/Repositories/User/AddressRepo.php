@@ -42,12 +42,30 @@ class AddressRepo {
 
 				if (is_null($address)) throw new \Exception("Tidak ditemukan alamat", 400);
 
-				
-				return AddressDB::join('user.user_profile as UP', 'UP.id_user_profile', '=', 'user_address.id_user_profile')
-				->join('user.user as U', 'U.id_user', '=', 'UP.id_user')
-				->where('id_user_address', $id_user_address)
-				->where('U.id_user',$id_user)
-				->update($value_update);
+				# jika alamat yang diupdate, mengubah is main address dari lamat yang sudah main address.
+				# maka dilakukan pengecetkan  
+				if ($value_update['is_main_address']==1) {
+					# update alamat semua menjadi 0 dan menjadikan alamt baru menjadi satu-satu nya main address
+					#langkah awal menjadikan semua alamat not main address
+					AddressDB::where('id_user_profile',$id_user)->update(['is_main_address'	=> 0]);
+					#kemudian baru menjadikan alamat yang diubah menjadi main address menjadi main address sesungguhnya.
+					return AddressDB::where('id_user_address', $id_user_address)->where('id_user_profile',$id_user)->update($value_update);
+				} else {
+					// return '';
+					return AddressDB::where('id_user_address', $id_user_address)->where('id_user_profile',$id_user)->update([
+						'address_name'              => $value_update['address_name'],
+						'receiver_name'             => $value_update['receiver_name'],
+						'address_text'              => $value_update['address_text'],
+						'city_or_district'          => $value_update['city_or_district'],
+						'postal_code'               => $value_update['postal_code'],
+						'address_longitude'         => $value_update['address_longitude'],
+						'address_latlong_text'      => $value_update['address_latlong_text'],
+						'receiver_phone'            => $value_update['receiver_phone'],
+						'address_latitude'          => $value_update['address_latitude'],
+						'address_longitude'         => $value_update['address_longitude'],
+						'address_latlong_text'      => $value_update['address_latlong_text'],
+					]);
+				} 
 
 			} else {
 				throw new \Exception("Kesalahan pada proses permintaan", 400);

@@ -82,10 +82,11 @@ class AddressController extends Controller
                 'receiver_phone'            => $request->receiver_phone,
                 'address_latitude'          => $request->address_latitude,
                 'address_longitude'         => $request->address_longitude,
-                'address_latlong_text'      => $request->address_latlong_text
+                'address_latlong_text'      => $request->address_latlong_text,
+                'is_main_address'           => $request->is_main_address
 
             ];
-
+            
             $id_user = $request->id_user; // from JWT Token Middleware
             $res = $this->AddressRepo->update_byuser($id_user , $request->id_user_address, $value_update);
             $Message = 'Berhasil';
