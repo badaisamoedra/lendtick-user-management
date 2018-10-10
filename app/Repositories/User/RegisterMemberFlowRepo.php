@@ -147,7 +147,10 @@ class RegisterMemberFlowRepo{
 			$order = "";
 			if(!is_null($sr)){
 				$sort = explode(",",$sr);
-				$order .= "ORDER BY ".$sort[0]." ".$sort[1];
+				if(count($sort) > 1)
+					$order .= "ORDER BY ".$sort[0]." ".$sort[1];
+				else
+				$order .= "ORDER BY ".$sr." asc";
 			}
 
 			// get length
