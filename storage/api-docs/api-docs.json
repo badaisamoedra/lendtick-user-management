@@ -758,7 +758,7 @@
                         "description": "Sort by",
                         "required": true,
                         "type": "string",
-                        "default": "[\"name\",\"asc\"]"
+                        "default": "name,asc"
                     },
                     {
                         "name": "filter",

@@ -438,7 +438,7 @@ class UsersController extends Controller
     *         name="sort",
     *         required=true,
     *         type="string",
-    *         default="[""name"",""asc""]"
+    *         default="name,asc"
     *     ),
     *     @SWG\Parameter(
     *         description="Filter column",
