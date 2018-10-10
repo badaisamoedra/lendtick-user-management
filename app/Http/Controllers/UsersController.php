@@ -464,4 +464,8 @@ class UsersController extends Controller
         $where = $r->input('filter');
         return response()->json(Api::response(true,Template::lang('success'),RegisterFlowRepo::approve_list($r, $where, $start, $length, $sort)),200);
     }
+
+    public function check_cors(){
+        return RestCurl::get("https://lentick-api-user-dev.azurewebsites.net/user/approve/list?start=0&length=10&sort=name,asc", [], 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvbGVudGljay1hcGktdXNlci1kZXYuYXp1cmV3ZWJzaXRlcy5uZXRcL2F1dGgiLCJpYXQiOjE1MzkxODI4MDUsImV4cCI6MTUzOTE5MDAwNSwibmJmIjoxNTM5MTgyODA1LCJqdGkiOiJkR28zZFIwendTQkhPTTZZIiwic3ViIjoxLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.UqFGhvTLuupQOn7wf9v_cCMaVuaBl0-oz5AK32U74pk');
+    }
 }

@@ -26,7 +26,7 @@ $router->get('/auth/refresh', 'AuthController@refresh');
 $router->post('/reg', 'UsersController@register');
 $router->get('/company/get', 'CompanyController@get');
 
-$router->group(['middleware'=>['authorize']], function() use($router){
+$router->group(['middleware'=>['authorize', 'cors']], function() use($router){
     // list approval user
     $router->get('/user/approve/list', 'UsersController@approve_list');
 
