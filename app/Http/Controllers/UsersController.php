@@ -460,7 +460,7 @@ class UsersController extends Controller
     public function approve_list(Request $r){
         $start = $r->input('start');
         $length = $r->input('length');
-        $sort = (array) json_decode($r->input('sort'));
+        $sort = $r->input('sort');
         $where = $r->input('filter');
         return response()->json(Api::response(true,Template::lang('success'),RegisterFlowRepo::approve_list($r, $where, $start, $length, $sort)),200);
     }
