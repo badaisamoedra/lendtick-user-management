@@ -114,7 +114,7 @@ class UsersController extends Controller
     * */
     public function register(Request $r, Hash $h){
         // default password
-        return response()->json(Api::response(true,'ok',$r->all()),200);
+        return response()->json(Api::response(true,'ok',$r->input()),200);
         // dd($r->input());
         $pass = $h->make('kop2018');
 
