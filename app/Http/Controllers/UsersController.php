@@ -114,8 +114,8 @@ class UsersController extends Controller
     * */
     public function register(Request $r, Hash $h){
         // default password
-
-        dd($r->input());
+        return response()->json(Api::response(true,'ok',$r->input()),200);
+        // dd($r->input());
         $pass = $h->make('kop2018');
 
         $data = $r->only(['name','company','identity_photo','company_identity_photo','phone_number','email','personal_photo','role']);
@@ -231,7 +231,7 @@ class UsersController extends Controller
             }
             return response()->json(Api::response(true,"ok"),400);
         }
-        return response()->json(Api::response(false,Template::lang('failed')),400);
+        return response()->json(Api::response(false,Template::lang('failed'),$r->input()),400);
     }
 
     /**
