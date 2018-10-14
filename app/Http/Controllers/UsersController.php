@@ -115,7 +115,7 @@ class UsersController extends Controller
     public function register(Request $r, Hash $h){
         // default password
 
-        dd($r);
+        dd($r->input());
         $pass = $h->make('kop2018');
 
         $data = $r->only(['name','company','identity_photo','company_identity_photo','phone_number','email','personal_photo','role']);
